@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Détail événement</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <img src="image/logo.png" alt="Logo">
+        <span>Retour accueil</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="detailMsg" class="alert"></div>
+
+    <section class="details-layout">
+      <article class="panel fade-target">
+        <img id="eventPoster" src="image/logo.png" alt="Poster événement" style="width:100%;max-height:300px;object-fit:cover;border-radius:12px;">
+        <h1 id="eventTitle">Chargement...</h1>
+        <p><strong>Date:</strong> <span id="eventDate">-</span></p>
+        <p><strong>Ville:</strong> <span id="eventCity">-</span></p>
+        <p><strong>Catégorie:</strong> <span id="eventCategory">-</span></p>
+        <p id="eventDescription"></p>
+      </article>
+
+      <aside class="panel fade-target">
+        <h2>Tickets disponibles</h2>
+        <div id="ticketList" class="ticket-list"></div>
+
+        <h3>Achat</h3>
+        <p id="buyerMode" class="meta"></p>
+
+        <form id="buyForm">
+          <div class="field">
+            <label for="ticketType">Type de ticket</label>
+            <select id="ticketType" name="id_ticket_type" required></select>
+          </div>
+
+          <div class="field">
+            <label for="quantity">Quantité</label>
+            <input id="quantity" name="quantite" type="number" min="1" value="1" required>
+          </div>
+
+          <div id="guestFields">
+            <div class="field">
+              <label for="buyerNom">Nom</label>
+              <input id="buyerNom" type="text" placeholder="Nom">
+            </div>
+            <div class="field">
+              <label for="buyerPrenom">Prénom</label>
+              <input id="buyerPrenom" type="text" placeholder="Prénom">
+            </div>
+            <div class="field">
+              <label for="buyerEmail">Email</label>
+              <input id="buyerEmail" type="email" placeholder="Email">
+            </div>
+          </div>
+
+          <p><strong>Total:</strong> <span id="totalPrice">0.00 MAD</span></p>
+          <button type="submit">Acheter maintenant</button>
+        </form>
+      </aside>
+    </section>
+
+    <section id="ticketOutput" style="display:none;" class="fade-target">
+      <h2>Billet généré</h2>
+      <article class="bill-a4">
+        <div class="bill-head">
+          <img class="logo" src="image/logo.png" alt="Logo">
+          <img id="billPoster" class="poster" src="image/logo.png" alt="Poster">
+        </div>
+        <div class="bill-body">
+          <div class="bill-meta">
+            <p><strong>Événement:</strong> <span id="billEvent"></span></p>
+            <p><strong>Nom / Prénom:</strong> <span id="billBuyer"></span></p>
+            <p><strong>Email:</strong> <span id="billEmail"></span></p>
+            <p><strong>Date:</strong> <span id="billDate"></span></p>
+            <p><strong>Type ticket:</strong> <span id="billType"></span></p>
+            <p><strong>Quantité:</strong> <span id="billQty"></span></p>
+            <p><strong>Total:</strong> <span id="billAmount"></span></p>
+          </div>
+          <div class="qr-wrap">
+            <div id="qrCanvas"></div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="js/detail.js"></script>
+</body>
+</html>
