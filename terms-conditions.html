@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditions d'Utilisation - Billetterie Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .terms-section {
+            min-height: calc(100vh - 200px);
+            background: var(--dark-bg);
+            padding: 80px 32px 40px;
+        }
+
+        .terms-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .terms-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .terms-header h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .terms-header p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .terms-content {
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+
+        .terms-section-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            color: var(--accent-primary);
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .terms-section-title:first-child {
+            margin-top: 0;
+        }
+
+        .terms-content p {
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            font-size: 15px;
+        }
+
+        .terms-content ul {
+            margin: 20px 0 20px 30px;
+            list-style: none;
+        }
+
+        .terms-content li {
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+            color: var(--text-primary);
+            font-size: 15px;
+        }
+
+        .terms-content li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+
+        .terms-content strong {
+            color: var(--accent-secondary);
+        }
+
+        .terms-notice {
+            background: rgba(255, 59, 59, 0.1);
+            border: 1px solid rgba(255, 59, 59, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 24px 0;
+            color: var(--text-primary);
+        }
+
+        .terms-notice strong {
+            color: var(--accent-primary);
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .terms-section {
+                padding: 80px 16px 40px;
+            }
+
+            .terms-header h1 {
+                font-size: 28px;
+            }
+
+            .terms-section-title {
+                font-size: 18px;
+            }
+
+            .terms-content p,
+            .terms-content li {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <div class="navbar-content">
+            <!-- NAVBAR LEFT: LOGO ONLY -->
+            <div class="navbar-left">
+                <div class="logo-container">
+                    <img src="src/image/logo.jpg" alt="Logo" class="logo">
+                    <span class="brand-name">Billetterie.com</span>
+                </div>
+            </div>
+
+            <!-- NAVBAR CENTER: ALL LINKS -->
+            <nav class="navbar-center">
+                <a href="index.html" class="nav-item">Accueil</a>
+                <a href="my-tickets.html" class="nav-item">Mes Billets</a>
+                <a href="contact.html" class="nav-item">Contact</a>
+            </nav>
+
+            <!-- NAVBAR RIGHT -->
+            <div class="navbar-right">
+                <div class="nav-auth" id="nav-auth">
+                    <!-- Will be populated by JavaScript -->
+                    <a href="auth.html" class="login-btn">
+                        <i class="fas fa-sign-in-alt"></i> Se Connecter
+                    </a>
+                </div>
+
+                <button class="mobile-menu" id="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav" id="mobile-nav">
+        <a href="index.html" class="mobile-nav-item">Accueil</a>
+        <a href="my-tickets.html" class="mobile-nav-item">Mes Billets</a>
+        <a href="contact.html" class="mobile-nav-item">Contact</a>
+        <div class="mobile-nav-divider"></div>
+        <div id="mobile-nav-auth" style="padding: 12px 16px;">
+            <!-- Will be populated by JavaScript -->
+        </div>
+    </nav>
+
+    <!-- TERMS & CONDITIONS SECTION -->
+    <section class="terms-section">
+        <div class="terms-container">
+            <a href="javascript:history.back()" class="back-button">
+                <i class="fas fa-chevron-left"></i> Retour
+            </a>
+
+            <div class="terms-header">
+                <h1><i class="fas fa-file-contract"></i> Conditions d'Utilisation</h1>
+                <p>Dernière mise à jour: Mai 2026</p>
+            </div>
+
+            <div class="terms-content">
+                <!-- 1. ACCEPTATION DES CONDITIONS -->
+                <div class="terms-section-title">
+                    <i class="fas fa-check-circle"></i> 1. Acceptation des Conditions
+                </div>
+                <p>
+                    En accédant et en utilisant le site Billetterie.com (ci-après "la Plateforme"), vous acceptez de respecter 
+                    ces conditions d'utilisation dans leur intégralité. Si vous n'acceptez pas ces conditions, veuillez ne pas 
+                    utiliser ce site.
+                </p>
+                <p>
+                    Billetterie.com se réserve le droit de modifier ces conditions à tout moment. Les modifications prendront 
+                    effet immédiatement après leur publication sur le site.
+                </p>
+
+                <!-- 2. DESCRIPTION DU SERVICE -->
+                <div class="terms-section-title">
+                    <i class="fas fa-info-circle"></i> 2. Description du Service
+                </div>
+                <p>
+                    Billetterie.com est une plateforme de réservation et de vente de billets pour des événements culturels, 
+                    sportifs et de divertissement. La Plateforme permet aux utilisateurs de :
+                </p>
+                <ul>
+                    <li>Consulter les événements disponibles</li>
+                    <li>Réserver et acheter des billets</li>
+                    <li>Gérer leurs réservations</li>
+                    <li>Télécharger leurs billets électroniques</li>
+                    <li>Contacter le support client</li>
+                </ul>
+
+                <!-- 3. CONDITIONS D'ACCÈS -->
+                <div class="terms-section-title">
+                    <i class="fas fa-key"></i> 3. Conditions d'Accès
+                </div>
+                <p>
+                    Pour accéder à certaines fonctionnalités de la Plateforme, vous devez créer un compte utilisateur. Vous 
+                    acceptez de fournir des informations exactes, complètes et à jour lors de votre inscription.
+                </p>
+                <ul>
+                    <li>Vous êtes responsable de la confidentialité de vos identifiants</li>
+                    <li>Vous ne devez pas partager votre compte avec d'autres personnes</li>
+                    <li>Vous êtes responsable de toutes les activités effectuées sous votre compte</li>
+                    <li>Vous devez notifier immédiatement en cas d'accès non autorisé</li>
+                </ul>
+
+                <!-- 4. RÉSERVATION ET PAIEMENT -->
+                <div class="terms-section-title">
+                    <i class="fas fa-credit-card"></i> 4. Réservation et Paiement
+                </div>
+                <p>
+                    Les tarifs affichés sont en Dirhams Marocains (MAD) et incluent les taxes. Un acompte ou la totalité du 
+                    prix peut être demandé au moment de la réservation.
+                </p>
+                <div class="terms-notice">
+                    <strong>Important:</strong> Les annulations sont soumises aux conditions spécifiques de chaque événement. 
+                    Consultez les détails de l'événement avant de réserver.
+                </div>
+                <ul>
+                    <li>Les paiements sont sécurisés et cryptés</li>
+                    <li>Nous acceptons les cartes bancaires et les paiements électroniques</li>
+                    <li>Une confirmation de paiement sera envoyée par email</li>
+                    <li>Les codes de réduction ne peuvent pas être cumulés</li>
+                </ul>
+
+                <!-- 5. BILLETS ÉLECTRONIQUES -->
+                <div class="terms-section-title">
+                    <i class="fas fa-ticket-alt"></i> 5. Billets Électroniques
+                </div>
+                <p>
+                    Après paiement confirmé, vous recevrez un billet électronique par email. Ce billet :
+                </p>
+                <ul>
+                    <li>Est personnel et non transférable</li>
+                    <li>Doit être présenté à l'entrée de l'événement</li>
+                    <li>Ne peut être revendu sans autorisation</li>
+                    <li>Est valable uniquement pour la date et l'heure spécifiées</li>
+                    <li>Contient un code QR à scanner à l'entrée</li>
+                </ul>
+
+                <!-- 6. PROPRIÉTÉ INTELLECTUELLE -->
+                <div class="terms-section-title">
+                    <i class="fas fa-copyright"></i> 6. Propriété Intellectuelle
+                </div>
+                <p>
+                    Tout le contenu de la Plateforme (textes, images, logos, designs, codes) est protégé par les droits d'auteur 
+                    et la propriété intellectuelle de Billetterie.com ou de ses partenaires. Vous ne pouvez pas :
+                </p>
+                <ul>
+                    <li>Reproduire ou copier le contenu sans autorisation</li>
+                    <li>Modifier ou créer des œuvres dérivées</li>
+                    <li>Utiliser le contenu à des fins commerciales</li>
+                    <li>Télécharger ou archiver le contenu</li>
+                </ul>
+
+                <!-- 7. RESPONSABILITÉS DE L'UTILISATEUR -->
+                <div class="terms-section-title">
+                    <i class="fas fa-shield-alt"></i> 7. Responsabilités de l'Utilisateur
+                </div>
+                <p>En utilisant la Plateforme, vous acceptez de :</p>
+                <ul>
+                    <li>Respecter toutes les lois et réglementations applicables</li>
+                    <li>Ne pas utiliser la Plateforme à des fins illégales</li>
+                    <li>Ne pas harceler, menacer ou abuser d'autres utilisateurs</li>
+                    <li>Ne pas télécharger de virus ou codes malveillants</li>
+                    <li>Ne pas usurper l'identité d'une autre personne</li>
+                    <li>Ne pas tenter de hacker ou d'accéder sans autorisation</li>
+                </ul>
+
+                <!-- 8. LIMITATION DE RESPONSABILITÉ -->
+                <div class="terms-section-title">
+                    <i class="fas fa-exclamation-triangle"></i> 8. Limitation de Responsabilité
+                </div>
+                <p>
+                    La Plateforme est fournie "telle quelle" sans garantie d'aucune sorte. Billetterie.com ne sera pas responsable de :
+                </p>
+                <ul>
+                    <li>Les dommages indirects ou consécutifs</li>
+                    <li>Les pertes de données ou de profits</li>
+                    <li>Les interruptions ou défaillances du service</li>
+                    <li>Les erreurs ou inexactitudes du contenu</li>
+                    <li>Les annulations ou reports d'événements</li>
+                </ul>
+                <div class="terms-notice">
+                    <strong>Limite de Responsabilité:</strong> En aucun cas la responsabilité de Billetterie.com ne dépassera 
+                    le montant total payé par l'utilisateur.
+                </div>
+
+                <!-- 9. DONNÉES PERSONNELLES -->
+                <div class="terms-section-title">
+                    <i class="fas fa-lock"></i> 9. Données Personnelles et Confidentialité
+                </div>
+                <p>
+                    Vos données personnelles sont traitées conformément à notre politique de confidentialité. Nous collectons 
+                    des informations pour :
+                </p>
+                <ul>
+                    <li>Traiter vos réservations et paiements</li>
+                    <li>Vous envoyer des confirmations et notifications</li>
+                    <li>Améliorer nos services</li>
+                    <li>Vous proposer des offres personnalisées</li>
+                </ul>
+                <p>
+                    Nous ne partagerons jamais vos données avec des tiers sans votre consentement, sauf si requis par la loi.
+                </p>
+
+                <!-- 10. COOKIES -->
+                <div class="terms-section-title">
+                    <i class="fas fa-cookie"></i> 10. Cookies et Suivi
+                </div>
+                <p>
+                    La Plateforme utilise des cookies pour améliorer votre expérience utilisateur. Ces cookies nous permettent de :
+                </p>
+                <ul>
+                    <li>Mémoriser vos préférences</li>
+                    <li>Suivre votre utilisation du site</li>
+                    <li>Analyser le trafic</li>
+                    <li>Sécuriser votre session</li>
+                </ul>
+                <p>
+                    Vous pouvez contrôler les cookies via les paramètres de votre navigateur.
+                </p>
+
+                <!-- 11. LIENS EXTERNES -->
+                <div class="terms-section-title">
+                    <i class="fas fa-link"></i> 11. Liens Externes
+                </div>
+                <p>
+                    La Plateforme peut contenir des liens vers des sites externes. Billetterie.com n'est pas responsable du 
+                    contenu de ces sites. Nous vous recommandons de lire les conditions d'utilisation de ces sites externes.
+                </p>
+
+                <!-- 12. MODIFICATIONS DU SERVICE -->
+                <div class="terms-section-title">
+                    <i class="fas fa-cogs"></i> 12. Modifications du Service
+                </div>
+                <p>
+                    Billetterie.com se réserve le droit de :
+                </p>
+                <ul>
+                    <li>Modifier ou supprimer des fonctionnalités</li>
+                    <li>Suspendre ou arrêter le service</li>
+                    <li>Modifier les tarifs et conditions</li>
+                    <li>Effectuer des maintenances et mises à jour</li>
+                </ul>
+
+                <!-- 13. RÉSILIATION -->
+                <div class="terms-section-title">
+                    <i class="fas fa-times-circle"></i> 13. Résiliation
+                </div>
+                <p>
+                    Billetterie.com peut résilier ou suspendre votre compte à tout moment si vous violez ces conditions. 
+                    Vous pouvez aussi supprimer votre compte à tout moment en contactant notre support.
+                </p>
+
+                <!-- 14. LOI APPLICABLE -->
+                <div class="terms-section-title">
+                    <i class="fas fa-balance-scale"></i> 14. Loi Applicable
+                </div>
+                <p>
+                    Ces conditions d'utilisation sont régies par les lois du Maroc. Tout différend sera résolu devant les 
+                    tribunaux marocains compétents.
+                </p>
+
+                <!-- 15. CONTACT -->
+                <div class="terms-section-title">
+                    <i class="fas fa-envelope"></i> 15. Nous Contacter
+                </div>
+                <p>
+                    Pour toute question concernant ces conditions d'utilisation, veuillez nous contacter :
+                </p>
+                <ul>
+                    <li><strong>Email:</strong> <a href="mailto:esisa.creators@esisa.ac.ma" style="color: var(--accent-primary); text-decoration: none;">esisa.creators@esisa.ac.ma</a></li>
+                    <li><strong>Téléphone:</strong> <a href="tel:+212600000001" style="color: var(--accent-primary); text-decoration: none;">+212 6 00 00 00 01</a></li>
+                    <li><strong>Adresse:</strong> 29 bis avenue Ibn Khatib, Fès 30050, Maroc</li>
+                </ul>
+
+                <div class="terms-notice" style="margin-top: 50px;">
+                    <strong>Merci de votre confiance!</strong> En continuant à utiliser la Plateforme, vous confirmez votre 
+                    acceptation de ces conditions d'utilisation.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Billetterie.com - Tous droits réservés</p>
+            <div class="footer-credits">
+                <a href="terms-conditions.html" style="color: var(--accent-primary); text-decoration: none; margin: 0 12px;">Conditions d'Utilisation</a>
+                |
+                <a href="contact.html" style="color: var(--accent-primary); text-decoration: none; margin: 0 12px;">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+    <script>
+        // Setup navigation auth and hamburger menu for this page
+        document.addEventListener('DOMContentLoaded', () => {
+            setupNavAuth();
+            setupHamburgerMenu();
+        });
+    </script>
+</body>
+</html>

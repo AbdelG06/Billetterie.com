@@ -39,6 +39,33 @@ function setupHeroCtaButton() {
     }
 }
 
+// ==================== SCROLL INDICATOR SETUP ====================
+function setupScrollIndicator() {
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', () => {
+            // Scroll to filters section smoothly
+            const filtersSection = document.querySelector('.filters-section');
+            if (filtersSection) {
+                filtersSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+        
+        // Make it interactive
+        scrollIndicator.style.cursor = 'pointer';
+        
+        // Add hover effect
+        scrollIndicator.addEventListener('mouseenter', () => {
+            scrollIndicator.style.opacity = '0.8';
+        });
+        
+        scrollIndicator.addEventListener('mouseleave', () => {
+            scrollIndicator.style.opacity = '1';
+        });
+    }
+}
+
 // ==================== INITIALIZATION ====================
 document.addEventListener('DOMContentLoaded', () => {
     setupSplashScreen();
@@ -48,6 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
     setupHamburgerMenu();
     setupHeroCtaButton();
+    setupScrollIndicator();
+    setupNavAuth();
 });
 
 // ==================== LOAD CITIES ====================
@@ -418,6 +447,93 @@ function buyTicket(ticketId, ticketLabel) {
     console.log(`Achat du ticket: ${ticketLabel} (ID: ${ticketId})`);
     // TODO: Implémentation du panier et du processus d'achat
     alert('Fonctionnalité d\'achat en développement - Ticket: ' + ticketLabel);
+}
+
+// ==================== NAV AUTH SETUP ====================
+function setupNavAuth() {
+    const navAuth = document.getElementById('nav-auth');
+    const mobileNavAuth = document.getElementById('mobile-nav-auth');
+    
+    // Check if user is logged in
+    const session = JSON.parse(sessionStorage.getItem('billetterie_session') || 'null');
+    
+    if (session && session.userId) {
+        // User is logged in - show profile
+        const initials = session.name.split(' ').map(n => n[0]).join('').toUpperCase();
+        const userRole = session.role.charAt(0).toUpperCase() + session.role.slice(1);
+        
+        // Desktop nav auth
+        if (navAuth) {
+            navAuth.innerHTML = `
+                <div class="user-profile-nav" id="user-profile-dropdown">
+                    <div class="user-avatar-nav">${initials}</div>
+                    <span class="user-name-nav">${session.name}</span>
+                    <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
+                    
+                    <div class="dropdown-menu" id="user-dropdown">
+                        <div style="padding: 12px 16px; border-bottom: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary);">
+                            ${session.email}<br><strong>${userRole}</strong>
+                        </div>
+                        ${session.role === 'admin' ? `<a href="dashboard.html" class="dropdown-item"><i class="fas fa-chart-line"></i> Dashboard</a>` : ''}
+                        ${session.role === 'creator' ? `<a href="creator-dashboard.html" class="dropdown-item"><i class="fas fa-film"></i> Mes Événements</a>` : ''}
+                        <a href="my-tickets.html" class="dropdown-item"><i class="fas fa-ticket-alt"></i> Mes Billets</a>
+                        <a href="#" class="dropdown-item" onclick="logout(); return false;"><i class="fas fa-sign-out-alt"></i> Se Déconnecter</a>
+                    </div>
+                </div>
+            `;
+            
+            // Setup dropdown toggle
+            const profileBtn = document.getElementById('user-profile-dropdown');
+            const dropdown = document.getElementById('user-dropdown');
+            
+            if (profileBtn && dropdown) {
+                profileBtn.addEventListener('click', () => {
+                    dropdown.classList.toggle('active');
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.user-profile-nav')) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            }
+        }
+        
+        // Mobile nav auth
+        if (mobileNavAuth) {
+            mobileNavAuth.innerHTML = `
+                <div style="padding-top: 8px;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; padding: 8px;">
+                        <div class="user-avatar-nav" style="width: 32px; height: 32px; font-size: 14px;">${initials}</div>
+                        <div style="flex: 1;">
+                            <div style="font-size: 13px; font-weight: 600;">${session.name}</div>
+                            <div style="font-size: 11px; color: var(--text-secondary);">${userRole}</div>
+                        </div>
+                    </div>
+                    ${session.role === 'admin' ? `<a href="dashboard.html" class="mobile-nav-item"><i class="fas fa-chart-line"></i> Dashboard</a>` : ''}
+                    ${session.role === 'creator' ? `<a href="creator-dashboard.html" class="mobile-nav-item"><i class="fas fa-film"></i> Mes Événements</a>` : ''}
+                    <a href="my-tickets.html" class="mobile-nav-item"><i class="fas fa-ticket-alt"></i> Mes Billets</a>
+                    <a href="#" class="mobile-nav-item" onclick="logout(); return false;"><i class="fas fa-sign-out-alt"></i> Se Déconnecter</a>
+                </div>
+            `;
+        }
+    } else {
+        // User not logged in - show login button
+        if (navAuth) {
+            navAuth.innerHTML = `<a href="auth.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Se Connecter</a>`;
+        }
+        
+        if (mobileNavAuth) {
+            mobileNavAuth.innerHTML = `<a href="auth.html" class="mobile-nav-login-btn"><i class="fas fa-sign-in-alt"></i> Se Connecter</a>`;
+        }
+    }
+}
+
+// ==================== LOGOUT FUNCTION ====================
+function logout() {
+    sessionStorage.removeItem('billetterie_session');
+    window.location.href = 'auth.html';
 }
 
 // ==================== HAMBURGER MENU ====================

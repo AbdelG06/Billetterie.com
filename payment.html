@@ -12,20 +12,31 @@
     <!-- NAVIGATION -->
     <header class="navbar">
         <div class="navbar-content">
-            <div class="logo-container">
-                <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+            <!-- NAVBAR LEFT: LOGO ONLY -->
+            <div class="navbar-left">
+                <div class="logo-container">
                     <img src="src/image/logo.jpg" alt="Logo" class="logo">
                     <span class="brand-name">Billetterie.com</span>
-                </a>
+                </div>
             </div>
-            
-            <nav class="nav-links">
+
+            <!-- NAVBAR CENTER: ALL LINKS -->
+            <nav class="navbar-center">
                 <a href="index.html" class="nav-item">Accueil</a>
                 <a href="my-tickets.html" class="nav-item">Mes Billets</a>
                 <a href="contact.html" class="nav-item">Contact</a>
             </nav>
 
-            <button class="mobile-menu" id="mobile-menu">
+            <!-- NAVBAR RIGHT -->
+            <div class="navbar-right">
+                <div class="nav-auth" id="nav-auth">
+                    <!-- Will be populated by JavaScript -->
+                    <a href="auth.html" class="login-btn">
+                        <i class="fas fa-sign-in-alt"></i> Se Connecter
+                    </a>
+                </div>
+
+                <button class="mobile-menu" id="mobile-menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -38,6 +49,10 @@
         <a href="index.html" class="mobile-nav-item">Accueil</a>
         <a href="my-tickets.html" class="mobile-nav-item">Mes Billets</a>
         <a href="contact.html" class="mobile-nav-item">Contact</a>
+        <div class="mobile-nav-divider"></div>
+        <div id="mobile-nav-auth" style="padding: 12px 16px;">
+            <!-- Will be populated by JavaScript -->
+        </div>
     </nav>
 
     <!-- PAYMENT SECTION -->
@@ -63,11 +78,24 @@
     <footer class="footer">
         <div class="footer-content">
             <p>&copy; 2026 Billetterie. Événements Premium au Maroc.</p>
+            <div class="footer-credits">
+                <a href="terms-conditions.html" style="color: var(--accent-primary); text-decoration: none; margin: 0 12px;">Conditions d'Utilisation</a>
+                |
+                <a href="contact.html" style="color: var(--accent-primary); text-decoration: none; margin: 0 12px;">Contact</a>
+            </div>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="payment.js"></script>
+    <script src="index.js"></script>
+    <script>
+        // Setup navigation auth and hamburger menu for this page
+        document.addEventListener('DOMContentLoaded', () => {
+            setupNavAuth();
+            setupHamburgerMenu();
+        });
+    </script>
 </body>
 </html>

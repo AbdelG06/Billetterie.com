@@ -25,7 +25,7 @@
     "image_url": "casablanca-du-rire.png",
     "nom_ville": "Casablanca",
     "categorie": "Comédie",
-    "prix_min": 150,
+    "prix_min": 100,
     "prix_max": 350,
     "lieu_precis": "Théâtre Municipal",
     "description": "Préparez-vous à un spectacle hilarant avec les meilleurs humoristes marocains et internationaux! La comédie revient à Casablanca avec un rendez-vous incontournable où le rire et l'amusement seront au programme. Découvrez des sketchs originaux, des mises en scène créatives et des artistes confirmés qui sauront vous faire rire du début à la fin. Un spectacle familial dans une ambiance conviviale et chaleureuse!",
@@ -33,7 +33,7 @@
     "organisateur": "Comedy Events Morocco",
     "contact": "+212 5 22 44 55 66",
     "parking": "Non - Parking municipal à proximité",
-    "regles": "Accès à partir de 18h00 - Enfants autorisés à partir de 6 ans"
+    "regles": "Accès à partir de 18h00 - Enfants autorisés à partir de 14 ans"
   },
   {
     "id_evenement": 3,
@@ -44,7 +44,7 @@
     "nom_ville": "Rabat",
     "categorie": "Sport",
     "prix_min": 200,
-    "prix_max": 600,
+    "prix_max": 1000,
     "lieu_precis": "Stade Moulay Abdallah",
     "description": "Assistez au match de gala annuel mettant en scène les légendes du football marocain et international! Une occasion rare de voir jouer ensemble les plus grands joueurs des années passées. Ce spectacle d'exception promet des dribbles élégants, des tirs précis et une ambiance électrisante dans les tribunes. Les recettes de cet événement caritatif seront reversées à des associations locales. Un moment à ne pas manquer pour tous les amateurs de football!",
     "capacite": 6500,
@@ -110,8 +110,8 @@
   {
     "id_evenement": 7,
     "titre": "Concours Pétanque Amateur et Familial",
-    "date_evenement": "2026-05-18",
-    "heure": "09:00",
+    "date_evenement": "2026-06-18",
+    "heure": "11:00",
     "image_url": "PETANQUE.png",
     "nom_ville": "Salé",
     "categorie": "Sport",
@@ -129,7 +129,7 @@
     "id_evenement": 8,
     "titre": "Festival des Arts Modernes",
     "date_evenement": "2026-06-05",
-    "heure": "22:00",
+    "heure": "21:00",
     "image_url": "FESTIVAL-ARTS.png",
     "nom_ville": "Tanger",
     "categorie": "Art",
@@ -146,8 +146,8 @@
   {
     "id_evenement": 9,
     "titre": "Rabat Jazz Festival - 12ème Édition",
-    "date_evenement": "2026-06-12",
-    "heure": "19:00",
+    "date_evenement": "2026-07-13",
+    "heure": "20:30",
     "image_url": "JAZZ-FESTIVAL.png",
     "nom_ville": "Rabat",
     "categorie": "Musique",
@@ -164,7 +164,7 @@
   {
     "id_evenement": 10,
     "titre": "5ème Édition Marathon de Fès",
-    "date_evenement": "2026-05-30",
+    "date_evenement": "2026-09-25",
     "heure": "06:00",
     "image_url": "MARATHON-DE-FES.png",
     "nom_ville": "Fes",

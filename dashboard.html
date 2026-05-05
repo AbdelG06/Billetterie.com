@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Billetterie Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <aside class="dashboard-sidebar" id="dashboard-sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <i class="fas fa-tickets-alt"></i>
+                <span>Billetterie</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebar-toggle">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="#" class="menu-item active" data-section="overview">
+                <i class="fas fa-th-large"></i>
+                <span>Accueil</span>
+            </a>
+            <a href="#" class="menu-item" data-section="users">
+                <i class="fas fa-users"></i>
+                <span>Utilisateurs</span>
+                <span class="badge" id="users-count">0</span>
+            </a>
+            <a href="#" class="menu-item" data-section="events">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Événements</span>
+                <span class="badge" id="events-count">0</span>
+            </a>
+            <a href="#" class="menu-item" data-section="reservations">
+                <i class="fas fa-ticket-alt"></i>
+                <span>Réservations</span>
+                <span class="badge" id="reservations-count">0</span>
+            </a>
+            <a href="#" class="menu-item" data-section="analytics">
+                <i class="fas fa-chart-line"></i>
+                <span>Statistiques</span>
+            </a>
+            <a href="#" class="menu-item" data-section="settings">
+                <i class="fas fa-cog"></i>
+                <span>Paramètres</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Déconnexion</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-main">
+        <!-- TOP BAR -->
+        <div class="dashboard-topbar">
+            <div class="topbar-left">
+                <button class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title" id="page-title">Accueil</h1>
+            </div>
+
+            <div class="topbar-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Rechercher..." id="search-input">
+                </div>
+
+                <div class="user-profile">
+                    <span class="user-avatar" id="user-avatar">👨‍💼</span>
+                    <div class="user-info">
+                        <span class="user-name" id="user-name">Admin</span>
+                        <span class="user-role">Administrateur</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENT AREA -->
+        <div class="dashboard-content">
+            <!-- OVERVIEW SECTION -->
+            <section class="content-section active" id="overview-section">
+                <h2>Tableau de Bord</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(255, 59, 59, 0.1); color: #ff3b3b;">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Utilisateurs</h3>
+                            <p class="stat-number" id="stat-users">0</p>
+                            <small>Clients actifs</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(76, 175, 80, 0.1); color: #4caf50;">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Événements</h3>
+                            <p class="stat-number" id="stat-events">0</p>
+                            <small>Événements actifs</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(33, 150, 243, 0.1); color: #2196f3;">
+                            <i class="fas fa-ticket-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Réservations</h3>
+                            <p class="stat-number" id="stat-reservations">0</p>
+                            <small>Billets vendus</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(255, 193, 7, 0.1); color: #ffc107;">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Revenus</h3>
+                            <p class="stat-number" id="stat-revenue">0 DH</p>
+                            <small>Total des ventes</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>Activité Récente</h3>
+                        <div class="activity-list" id="activity-list">
+                            <p class="empty-message">Aucune activité récente</p>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>Tâches Prioritaires</h3>
+                        <div class="tasks-list">
+                            <div class="task">
+                                <input type="checkbox">
+                                <span>Vérifier les événements en attente</span>
+                            </div>
+                            <div class="task">
+                                <input type="checkbox">
+                                <span>Traiter les demandes des créateurs</span>
+                            </div>
+                            <div class="task">
+                                <input type="checkbox">
+                                <span>Générer rapport mensuel</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- USERS SECTION -->
+            <section class="content-section" id="users-section">
+                <div class="section-header">
+                    <h2>Gestion des Utilisateurs</h2>
+                    <button class="btn btn-primary" id="add-user-btn">
+                        <i class="fas fa-plus"></i> Ajouter un utilisateur
+                    </button>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Utilisateur</th>
+                                <th>Email</th>
+                                <th>Rôle</th>
+                                <th>Inscrit</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body">
+                            <tr><td colspan="5" class="empty-message">Aucun utilisateur</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- EVENTS SECTION -->
+            <section class="content-section" id="events-section">
+                <div class="section-header">
+                    <h2>Gestion des Événements</h2>
+                    <button class="btn btn-primary" id="add-event-btn">
+                        <i class="fas fa-plus"></i> Créer un événement
+                    </button>
+                </div>
+
+                <div class="filters-bar">
+                    <select id="events-filter-status">
+                        <option value="">Tous les statuts</option>
+                        <option value="active">Actif</option>
+                        <option value="pending">En attente</option>
+                        <option value="ended">Terminé</option>
+                    </select>
+                    <select id="events-filter-category">
+                        <option value="">Toutes les catégories</option>
+                        <option value="music">Musique</option>
+                        <option value="sport">Sport</option>
+                        <option value="art">Art</option>
+                    </select>
+                </div>
+
+                <div class="events-grid" id="events-grid">
+                    <p class="empty-message">Aucun événement</p>
+                </div>
+            </section>
+
+            <!-- RESERVATIONS SECTION -->
+            <section class="content-section" id="reservations-section">
+                <div class="section-header">
+                    <h2>Gestion des Réservations</h2>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Ticket ID</th>
+                                <th>Utilisateur</th>
+                                <th>Événement</th>
+                                <th>Quantité</th>
+                                <th>Prix Total</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reservations-table-body">
+                            <tr><td colspan="7" class="empty-message">Aucune réservation</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ANALYTICS SECTION -->
+            <section class="content-section" id="analytics-section">
+                <h2>Statistiques</h2>
+                <div class="analytics-grid">
+                    <div class="chart-card">
+                        <h3>Événements par Catégorie</h3>
+                        <div id="category-chart" style="height: 200px; display: flex; align-items: flex-end; gap: 10px;">
+                            <p class="empty-message">Données insuffisantes</p>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Réservations par Mois</h3>
+                        <div id="monthly-chart" style="height: 200px;">
+                            <p class="empty-message">Données insuffisantes</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SETTINGS SECTION -->
+            <section class="content-section" id="settings-section">
+                <h2>Paramètres</h2>
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h3>Profil Admin</h3>
+                        <div class="setting-item">
+                            <label>Nom</label>
+                            <input type="text" id="setting-name" class="form-input">
+                        </div>
+                        <div class="setting-item">
+                            <label>Email</label>
+                            <input type="email" id="setting-email" class="form-input">
+                        </div>
+                        <button class="btn btn-primary" onclick="saveSettings()">
+                            <i class="fas fa-save"></i> Enregistrer
+                        </button>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Sécurité</h3>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-key"></i> Changer le mot de passe
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-lock"></i> Sessions actives
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- MODALS -->
+    <!-- Add User Modal -->
+    <div class="modal" id="add-user-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ajouter un utilisateur</h3>
+                <button class="close-btn" onclick="closeModal('add-user-modal')">&times;</button>
+            </div>
+            <form class="modal-form" id="add-user-form">
+                <div class="form-group">
+                    <label>Nom</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Rôle</label>
+                    <select required>
+                        <option value="user">Utilisateur</option>
+                        <option value="creator">Créateur</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('add-user-modal')">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
