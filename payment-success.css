@@ -1,0 +1,316 @@
+/* ==================== SUCCESS PAGE STYLES ==================== */
+
+.success-section {
+    position: relative;
+    padding: 120px 32px 80px 32px;
+    background: linear-gradient(180deg, rgba(13, 13, 13, 0) 0%, rgba(26, 26, 26, 0.8) 100%);
+    min-height: 100vh;
+    margin-top: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-container {
+    max-width: 900px;
+    width: 100%;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* ==================== SUCCESS CARD ==================== */
+.success-card {
+    background: rgba(26, 26, 26, 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 60px 40px;
+    text-align: center;
+    animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Success Icon */
+.success-icon {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #4caf50, #45a049);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px;
+    font-size: 60px;
+    color: var(--white);
+    animation: iconBounce 0.6s ease-out 0.3s both;
+}
+
+@keyframes iconBounce {
+    0% {
+        transform: scale(0) rotateZ(-45deg);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1) rotateZ(0);
+    }
+}
+
+/* Success Title */
+.success-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #4caf50, var(--white));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Success Subtitle */
+.success-subtitle {
+    font-size: 18px;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+}
+
+/* ==================== TICKET INFO CARD ==================== */
+.ticket-info-card {
+    background: rgba(255, 59, 59, 0.05);
+    border: 2px solid rgba(76, 175, 80, 0.3);
+    border-radius: 16px;
+    padding: 30px;
+    margin: 40px 0;
+    text-align: left;
+    animation: slideInUp 0.6s ease-out 0.4s both;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ticket-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.ticket-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ticket-info-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.ticket-info-value {
+    font-size: 16px;
+    color: var(--white);
+    font-weight: 700;
+}
+
+.ticket-info-value.highlight {
+    color: var(--accent-primary);
+    font-size: 18px;
+}
+
+/* ==================== ACTIONS ==================== */
+.success-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 40px;
+    animation: fadeInUp 0.6s ease-out 0.5s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.success-button {
+    padding: 16px 24px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.success-button.primary {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: var(--white);
+    box-shadow: var(--shadow-glow);
+}
+
+.success-button.primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 40px rgba(255, 59, 59, 0.4);
+}
+
+.success-button.secondary {
+    background: rgba(76, 175, 80, 0.1);
+    border: 2px solid rgba(76, 175, 80, 0.3);
+    color: #4caf50;
+}
+
+.success-button.secondary:hover {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: #4caf50;
+}
+
+/* ==================== INFO MESSAGE ==================== */
+.success-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+    background: rgba(76, 175, 80, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 12px;
+    margin-top: 30px;
+    color: #4caf50;
+    font-size: 14px;
+    line-height: 1.6;
+    animation: fadeInUp 0.6s ease-out 0.6s both;
+}
+
+.success-info i {
+    font-size: 16px;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+/* ==================== TICKET PREVIEW ==================== */
+.ticket-preview {
+    background: linear-gradient(135deg, #ff3b3b, #ff6b6b);
+    border-radius: 12px;
+    padding: 24px;
+    color: white;
+    margin-top: 30px;
+    animation: fadeInUp 0.6s ease-out 0.7s both;
+}
+
+.ticket-preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.ticket-preview-title {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ticket-preview-id {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.ticket-preview-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.ticket-preview-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.ticket-preview-label {
+    font-size: 11px;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ticket-preview-value {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+    .success-section {
+        padding: 100px 16px 60px 16px;
+    }
+
+    .success-card {
+        padding: 40px 20px;
+    }
+
+    .success-icon {
+        width: 100px;
+        height: 100px;
+        font-size: 50px;
+    }
+
+    .success-title {
+        font-size: 24px;
+    }
+
+    .success-subtitle {
+        font-size: 16px;
+    }
+
+    .ticket-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .success-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .ticket-preview-content {
+        grid-template-columns: 1fr;
+    }
+}

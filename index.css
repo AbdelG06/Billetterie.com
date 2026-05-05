@@ -630,6 +630,10 @@ body {
 }
 
 .event-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     padding: 10px 16px;
     background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
     color: var(--white);
@@ -641,6 +645,7 @@ body {
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 0.3px;
+    text-decoration: none;
 }
 
 .event-btn:hover {

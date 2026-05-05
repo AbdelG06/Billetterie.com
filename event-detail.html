@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails de l'événement - Billetterie Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="event-detail.css">
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <div class="navbar-content">
+            <div class="logo-container">
+                <img src="src/image/logo.jpg" alt="Logo" class="logo">
+                <span class="brand-name">Billetterie.com</span>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="index.html" class="nav-item">Accueil</a>
+                <a href="my-tickets.html" class="nav-item">Mes Billets</a>
+                <a href="contact.html" class="nav-item">Contact</a>
+            </nav>
+
+            <button class="mobile-menu" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav" id="mobile-nav">
+        <a href="index.html" class="mobile-nav-item">Accueil</a>
+        <a href="my-tickets.html" class="mobile-nav-item">Mes Billets</a>
+        <a href="contact.html" class="mobile-nav-item">Contact</a>
+    </nav>
+
+    <!-- EVENT DETAIL SECTION -->
+    <section class="event-detail-section" id="event-detail-section">
+        <div class="event-detail-container">
+            <!-- Back button -->
+            <a href="index.html" class="back-button">
+                <i class="fas fa-chevron-left"></i> Retour aux événements
+            </a>
+
+            <!-- Main content -->
+            <div class="event-detail-main" id="event-detail-main">
+                <!-- Loading state -->
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Chargement de l'événement...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Billetterie. Événements Premium au Maroc.</p>
+        </div>
+    </footer>
+
+    <!-- RESERVATION MODAL -->
+    <div class="reservation-modal" id="reservation-modal">
+        <div class="reservation-modal-content">
+            <button class="modal-close" id="reservation-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="reservation-body">
+                <!-- Reservation form will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="event-detail.js"></script>
+</body>
+</html>

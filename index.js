@@ -256,7 +256,7 @@ function createEventCard(event) {
                 <div class="event-meta-item"><i class="fas fa-map-marker-alt"></i><span>${event.nom_ville}</span></div>
             </div>
             <span class="event-price">À partir de ${event.prix_min}DH</span>
-            <button class="event-btn" onclick="openEventDetails(${event.id_evenement})"><i class="fas fa-arrow-right"></i> Détails</button>
+            <a href="event-detail.html?id=${event.id_evenement}" class="event-btn"><i class="fas fa-arrow-right"></i> Détails</a>
         </div>
     `;
 

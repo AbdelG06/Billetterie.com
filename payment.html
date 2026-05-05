@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement - Billetterie Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="payment.css">
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <div class="navbar-content">
+            <div class="logo-container">
+                <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+                    <img src="src/image/logo.jpg" alt="Logo" class="logo">
+                    <span class="brand-name">Billetterie.com</span>
+                </a>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="index.html" class="nav-item">Accueil</a>
+                <a href="my-tickets.html" class="nav-item">Mes Billets</a>
+                <a href="contact.html" class="nav-item">Contact</a>
+            </nav>
+
+            <button class="mobile-menu" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav" id="mobile-nav">
+        <a href="index.html" class="mobile-nav-item">Accueil</a>
+        <a href="my-tickets.html" class="mobile-nav-item">Mes Billets</a>
+        <a href="contact.html" class="mobile-nav-item">Contact</a>
+    </nav>
+
+    <!-- PAYMENT SECTION -->
+    <section class="payment-section">
+        <div class="payment-container">
+            <div class="payment-header">
+                <a href="javascript:history.back()" class="back-button">
+                    <i class="fas fa-chevron-left"></i> Retour
+                </a>
+                <h1 class="page-title">Paiement Sécurisé</h1>
+            </div>
+
+            <div class="payment-content" id="payment-content">
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Chargement du formulaire de paiement...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Billetterie. Événements Premium au Maroc.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="payment.js"></script>
+</body>
+</html>
