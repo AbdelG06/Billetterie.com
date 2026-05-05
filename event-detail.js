@@ -48,7 +48,7 @@ function displayEventDetails(event) {
     // Image HTML avec fallback
     let imageHTML = '';
     if (event.image_url && event.image_url !== 'NULL') {
-        imageHTML = `<img src="src/image/${event.image_url}" alt="${event.titre}" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML='<i class=\"fas fa-theater-masks\"></i>'">`;
+        imageHTML = `<img src="/images/${event.image_url}" alt="${event.titre}" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML='<i class=\"fas fa-theater-masks\"></i>'">`;
     } else {
         imageHTML = `<i class="fas fa-theater-masks"></i>`;
     }
