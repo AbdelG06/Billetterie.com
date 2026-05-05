@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Billetterie Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <div class="navbar-content">
+            <div class="logo-container">
+                <img src="src/image/logo.jpg" alt="Logo" class="logo">
+                <span class="brand-name">Billetterie</span>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="index.html" class="nav-item">Accueil</a>
+                <a href="#" class="nav-item">Mes Billets</a>
+                <a href="contact.html" class="nav-item active">Contact</a>
+            </nav>
+
+            <button class="mobile-menu" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav" id="mobile-nav">
+        <a href="index.html" class="mobile-nav-item">Accueil</a>
+        <a href="#" class="mobile-nav-item">Mes Billets</a>
+        <a href="contact.html" class="mobile-nav-item">Contact</a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero contact-hero">
+        <div class="hero-background">
+            <div class="hero-gradient"></div>
+            <div class="hero-overlay"></div>
+        </div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">Nous Contacter</h1>
+            <p class="hero-subtitle">Des questions ? Besoin d'aide ? Nous sommes là pour vous.</p>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-form-wrapper">
+                    <h2><i class="fas fa-paper-plane"></i> Envoyez-nous un Message</h2>
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name"><i class="fas fa-user"></i> Nom Complet</label>
+                            <input type="text" id="name" name="name" placeholder="Votre nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                            <input type="email" id="email" name="email" placeholder="votre@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone"><i class="fas fa-phone"></i> Téléphone</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+212 6 XX XX XX XX">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject"><i class="fas fa-heading"></i> Sujet</label>
+                            <input type="text" id="subject" name="subject" placeholder="Objet de votre message" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message"><i class="fas fa-comment"></i> Message</label>
+                            <textarea id="message" name="message" rows="6" placeholder="Votre message ici..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit"><i class="fas fa-send"></i> Envoyer</button>
+                    </form>
+                </div>
+
+                <!-- Contact Info Cards -->
+                <div class="contact-info-wrapper">
+                    <h2><i class="fas fa-info-circle"></i> Nos Coordonnées</h2>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope-open"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p><a href="mailto:esisa.creators@esisa.ac.ma">esisa.creators@esisa.ac.ma</a></p>
+                        <p class="small">Nous répondons sous 24h</p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>Téléphone</h3>
+                        <p><a href="tel:+212600000001">+212 6 00 00 00 01</a></p>
+                        <p class="small">Lun-Ven: 09h00 - 18h00</p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Adresse</h3>
+                        <p>29 bis avenue Ibn Khatib<br>route D'imouzzer, Fès 30050<br>Maroc</p>
+                        <p class="small">Siège principal</p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Horaires</h3>
+                        <p>Lun-Ven: 09h00 - 18h00<br>Sam: 10h00 - 16h00<br>Dimanche: Fermé</p>
+                        <p class="small">Heure locale (GMT+1)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about-section">
+        <div class="about-container">
+            <h2><i class="fas fa-heart"></i> À Propos de Nous</h2>
+            
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <h3>Notre Mission</h3>
+                    <p>Billetterie est la plateforme leader de vente de billets d'événements au Maroc. Nous nous engageons à vous offrir la meilleure expérience.</p>
+                </div>
+
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Notre Vision</h3>
+                    <p>Rendre l'accès aux événements culturels et divertissants accessible à tous. La musique et les arts pour chacun.</p>
+                </div>
+
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Nos Valeurs</h3>
+                    <p>Intégrité, innovation et engagement envers nos clients. Nous travaillons chaque jour pour améliorer notre service.</p>
+                </div>
+
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Notre Engagement</h3>
+                    <p>Soutenir les artistes locaux, offrir les meilleurs tarifs et fournir un service client exceptionnel toujours.</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>+50,000</h4>
+                    <p>Billets vendus</p>
+                </div>
+                <div class="stat-card">
+                    <h4>+200</h4>
+                    <p>Événements</p>
+                </div>
+                <div class="stat-card">
+                    <h4>+30,000</h4>
+                    <p>Clients satisfaits</p>
+                </div>
+                <div class="stat-card">
+                    <h4>98%</h4>
+                    <p>Satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Billetterie. Événements Premium au Maroc.</p>
+            <p class="footer-credits">BY: <strong>Aya Idrissi El Bouzaidi</strong> & <strong>Abdelkrim Garwaoui</strong></p>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>

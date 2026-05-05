@@ -1,0 +1,92 @@
+[
+  {
+    "id_evenement": 1,
+    "titre": "Concert Gims",
+    "date_evenement": "2026-06-15",
+    "image_url": "concert-gims.png",
+    "nom_ville": "Casablanca",
+    "categorie": "Musique",
+    "prix_min": 250
+  },
+  {
+    "id_evenement": 2,
+    "titre": "Casablanca du Rire",
+    "date_evenement": "2026-05-20",
+    "image_url": "Casablanca-du-Rire.png",
+    "nom_ville": "Casablanca",
+    "categorie": "Comédie",
+    "prix_min": 150
+  },
+  {
+    "id_evenement": 3,
+    "titre": "Match de Gala : Légendes",
+    "date_evenement": "2026-05-25",
+    "image_url": "Match-de-Gala.png",
+    "nom_ville": "Rabat",
+    "categorie": "Sport",
+    "prix_min": 200
+  },
+  {
+    "id_evenement": 4,
+    "titre": "Gnaoua Festival",
+    "date_evenement": "2026-06-01",
+    "image_url": "Festival-gnaoua.jpg",
+    "nom_ville": "Essaouira",
+    "categorie": "Festival",
+    "prix_min": 300
+  },
+  {
+    "id_evenement": 5,
+    "titre": "Avant-première : Dune Part III",
+    "date_evenement": "2026-05-22",
+    "image_url": "Poster-DUNE-part-3.jpg",
+    "nom_ville": "Marrakech",
+    "categorie": "Cinéma",
+    "prix_min": 80
+  },
+  {
+    "id_evenement": 6,
+    "titre": "Issawa à l'Ancienne - Saad Elkouhen",
+    "date_evenement": "2026-06-10",
+    "image_url": "issawa-a-l-ancienne.jpg",
+    "nom_ville": "Fes",
+    "categorie": "Musique",
+    "prix_min": 120
+  },
+  {
+    "id_evenement": 7,
+    "titre": "Concours Pétanque Amateur et Familial",
+    "date_evenement": "2026-05-18",
+    "image_url": "PETANQUE.png",
+    "nom_ville": "Salé",
+    "categorie": "Sport",
+    "prix_min": 50
+  },
+  {
+    "id_evenement": 8,
+    "titre": "Festival des Arts Modernes",
+    "date_evenement": "2026-06-05",
+    "image_url": "FESTIVAL-ARTS.png",
+    "nom_ville": "Tangier",
+    "categorie": "Art",
+    "prix_min": 100
+  },
+  {
+    "id_evenement": 9,
+    "titre": "Rabat Jazz Festival - 12ème Édition",
+    "date_evenement": "2026-06-12",
+    "image_url": "JAZZ-FESTIVAL.png",
+    "nom_ville": "Rabat",
+    "categorie": "Musique",
+    "prix_min": 180
+  },
+  {
+    "id_evenement": 10,
+    "titre": "5ème Édition Marathon de Fès",
+    "date_evenement": "2026-05-30",
+    "image_url": "MARATHON-DE-FES.png",
+    "nom_ville": "Fes",
+    "categorie": "Sport",
+    "prix_min": 75
+  }
+]

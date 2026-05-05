@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 02 mai 2026 à 15:31
+-- Généré le : lun. 04 mai 2026 à 17:14
 -- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.0.30
+-- Version de PHP : 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,6 +34,15 @@ CREATE TABLE `billets_generes` (
   `code_unique_qr` varchar(100) DEFAULT NULL,
   `est_scanne` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `billets_generes`
+--
+
+INSERT INTO `billets_generes` (`id_billet`, `id_commande`, `id_ticket_type`, `code_unique_qr`, `est_scanne`) VALUES
+(1, 1, 1, 'BIL-8B7EFCB4FC', 1),
+(2, 2, 1, 'BIL-83AD8DB1E4', 0),
+(3, 3, 2, 'BIL-F31C1EB29E', 0);
 
 -- --------------------------------------------------------
 
@@ -79,6 +88,15 @@ CREATE TABLE `commandes` (
   `statut_paiement` enum('en_attente','paye','echoue') DEFAULT 'en_attente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `commandes`
+--
+
+INSERT INTO `commandes` (`id_commande`, `id_utilisateur`, `date_commande`, `montant_total`, `statut_paiement`) VALUES
+(1, 2, '2026-05-03 00:13:18', 800.00, 'paye'),
+(2, 2, '2026-05-03 00:30:48', 800.00, 'paye'),
+(3, NULL, '2026-05-03 00:31:01', 150.00, 'paye');
+
 -- --------------------------------------------------------
 
 --
@@ -102,11 +120,16 @@ CREATE TABLE `evenements` (
 --
 
 INSERT INTO `evenements` (`id_evenement`, `titre`, `description`, `date_evenement`, `lieu_precis`, `image_url`, `id_ville`, `id_categorie`, `id_organisateur`) VALUES
-(1, 'Concert Gims', NULL, '2026-08-15 21:00:00', NULL, NULL, 1, 1, 1),
-(2, 'Casablanca du Rire', 'Le gala d\'ouverture avec les plus grandes stars de l\'humour.', '2026-07-10 20:30:00', 'Théâtre Mohammed V', NULL, 1, 7, 1),
-(3, 'Match de Gala : Légendes', 'Un match caritatif avec d\'anciennes gloires du football mondial.', '2026-05-25 18:00:00', 'Grand Stade de Marrakech', NULL, 3, 6, 1),
-(4, 'Gnaoua Festival', 'Le rendez-vous incontournable de la musique mystique et du jazz.', '2026-06-15 19:00:00', 'Place Moulay Hassan', NULL, 3, 2, 1),
-(5, 'Avant-première : Dune Part III', 'Projection exclusive en présence de l\'équipe technique.', '2026-05-12 21:00:00', 'Cinéma Renaissance', NULL, 2, 3, 1);
+(1, 'Concert Gims', 'Concert exceptionnel avec Gims en live', '2026-08-15 21:00:00', 'Stade Mohammed V, Casablanca', 'src/image/concert-gims.png', 1, 1, 1),
+(2, 'Casablanca du Rire', 'Le gala d\'ouverture avec les plus grandes stars de l\'humour.', '2026-07-10 20:30:00', 'Théâtre Mohammed V', 'src/image/Casablanca-du-Rire.png', 1, 7, 1),
+(3, 'Match de Gala : Légendes', 'Un match caritatif avec d\'anciennes gloires du football mondial.', '2026-05-25 18:00:00', 'Grand Stade de Marrakech', 'src/image/Match-de-Gala.png', 3, 6, 1),
+(4, 'Gnaoua Festival', 'Le rendez-vous incontournable de la musique mystique et du jazz.', '2026-06-15 19:00:00', 'Place Moulay Hassan', 'src/image/Festival-gnaoua.jpg', 3, 2, 1),
+(5, 'Avant-première : Dune Part III', 'Projection exclusive en présence de l\'équipe technique.', '2026-05-12 21:00:00', 'Cinéma Renaissance', 'src/image/Poster-DUNE-part-3.jpg', 2, 3, 1),
+(6, 'Issawa à l\'Ancienne - Saad Elkouhen', 'Achiya Issawiya Beldia avec Saad Elkouhen pour célébrer Achoura', '2026-06-07 16:00:00', 'Villa Lemseffer, 540 Bd Panoramique, Californie, Casablanca', 'src/image/issawa-a-l-ancienne.jpg', 1, 2, 1),
+(7, 'Concours Pétanque Amateur et Familial', 'Organisé par ESISA CREATORS. Inscriptions 200dh/équipe. Restauration et Buvette sur place.', '2026-06-18 11:00:00', 'SALLE SPORTS ESISA', 'src/image/PETANQUE.png', 11, 9, 1),
+(8, 'Festival des Arts Modernes', 'Événement culturel mettant en avant les arts modernes. Billetterie en ligne.', '2026-06-08 21:00:00', 'MEGARAMA', 'src/image/FESTIVAL-ARTS.png', 1, 2, 1),
+(9, 'Rabat Jazz Festival - 12ème Édition', 'Résidences artistiques mêlant musiciens européens et marocains. Tarif unique 120DH.', '2026-07-13 20:30:00', 'Amphithéâtre du Parc Hassan II', 'src/image/JAZZ-FESTIVAL.png', 2, 2, 1),
+(10, '5ème Édition Marathon de Fès', 'Individuel, Semi-marathon et Relais. RDV et départ aux Champs de Courses.', '2026-09-25 08:00:00', 'Champs de Courses', 'src/image/MARATHON-DE-FES.png', 11, 9, 1);
 
 -- --------------------------------------------------------
 
@@ -148,8 +171,8 @@ CREATE TABLE `tickets_types` (
 --
 
 INSERT INTO `tickets_types` (`id_ticket_type`, `id_evenement`, `libelle_tarif`, `prix`, `stock_initial`, `stock_actuel`) VALUES
-(1, 1, 'Zone VIP', 800.00, 100, 100),
-(2, 2, 'Normal', 150.00, 400, 400),
+(1, 1, 'Zone VIP', 800.00, 100, 98),
+(2, 2, 'Normal', 150.00, 400, 399),
 (3, 2, 'VIP', 350.00, 50, 50),
 (4, 3, 'Tribune Est', 50.00, 2000, 2000),
 (5, 3, 'Tribune Ouest', 50.00, 2000, 2000),
@@ -328,7 +351,7 @@ ALTER TABLE `villes`
 -- AUTO_INCREMENT pour la table `billets_generes`
 --
 ALTER TABLE `billets_generes`
-  MODIFY `id_billet` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_billet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `categories`
@@ -340,13 +363,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT pour la table `commandes`
 --
 ALTER TABLE `commandes`
-  MODIFY `id_commande` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_commande` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `evenements`
 --
 ALTER TABLE `evenements`
-  MODIFY `id_evenement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_evenement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `organisateurs`
