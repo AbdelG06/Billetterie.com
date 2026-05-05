@@ -233,7 +233,7 @@ function createEventCard(event) {
     // Image ou placeholder
     let imageHTML = '';
     if (event.image_url && event.image_url !== 'NULL') {
-        imageHTML = `<img src="/images/${event.image_url}" alt="${event.titre}" class="event-image" onerror="this.parentElement.innerHTML='<div class=\\'event-placeholder\\'><i class=\\'fas fa-theater-masks\\'></i></div>'">`;
+        imageHTML = `<img src="src/image/${event.image_url}" alt="${event.titre}" class="event-image" onerror="this.parentElement.innerHTML='<div class=\'event-placeholder\'><i class=\'fas fa-theater-masks\'></i></div>'">`;
     } else {
         imageHTML = `<div class="event-placeholder"><i class="fas fa-theater-masks"></i></div>`;
     }
@@ -369,7 +369,7 @@ function displayEventModal(event, tickets) {
 
     let imageHTML = '';
     if (event.image_url && event.image_url !== 'NULL') {
-        imageHTML = `<img src="/images/${event.image_url}" alt="${event.titre}" class="modal-event-image" style="width: 100%; height: 300px; object-fit: cover; border-radius: 16px; margin: 20px 0;" onerror="this.style.display='none'">`;
+        imageHTML = `<img src="src/image/${event.image_url}" alt="${event.titre}" class="modal-event-image" style="width: 100%; height: 300px; object-fit: cover; border-radius: 16px; margin: 20px 0;" onerror="this.style.display='none'">`;
     }
 
     let ticketsHTML = '';
