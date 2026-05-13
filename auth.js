@@ -1,13 +1,33 @@
 // ==================== AUTHENTICATION SYSTEM ====================
 
-// Initialize demo admin account
+// ==================== PASSWORD VISIBILITY TOGGLE ====================
+function togglePassword(inputId) {
+    const input = document.getElementById(inputId);
+    const button = event.currentTarget;
+    const icon = button.querySelector('i');
+    
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        input.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+}
+
+// Initialize demo account
 function initializeDemoAccounts() {
     let users = JSON.parse(localStorage.getItem('billetterie_users')) || [];
     
-    // Check if admin already exists
-    const adminExists = users.some(u => u.email === 'admin@billetterie.com');
+    // Check if admin already exists AND if Aya exists (to force update data)
+    const needsInitialization = !users.some(u => u.email === 'admin@billetterie.com') || !users.some(u => u.email === 'Aya@mail.ma');
     
-    if (!adminExists) {
+    if (needsInitialization) {
+        // Clear old demo users that might block the update
+        users = users.filter(u => u.email !== 'admin@billetterie.com' && u.email !== 'creator@example.com' && u.email !== 'user@example.com');
+        
         const demoUsers = [
             {
                 id: 'admin_001',
@@ -35,6 +55,43 @@ function initializeDemoAccounts() {
                 role: 'user',
                 createdAt: new Date().toISOString(),
                 avatar: '👩‍💼'
+            },
+            // Ajout des utilisateurs de la base de données phpMyAdmin
+            {
+                id: 'user_002',
+                name: 'Ahmed El Mansouri',
+                email: 'ahmed@mail.ma',
+                password: 'password', // le mot de passe hashé a été remplacé pour que tu puisses l'utiliser
+                role: 'user',
+                createdAt: new Date().toISOString(),
+                avatar: '👤'
+            },
+            {
+                id: 'user_003',
+                name: 'Aya Idrissi El Bouzaidi',
+                email: 'Aya@mail.ma',
+                password: 'password',
+                role: 'user',
+                createdAt: new Date().toISOString(),
+                avatar: '👤'
+            },
+            {
+                id: 'user_004',
+                name: 'Amina Yahyaoui',
+                email: 'Amina@mail.ma',
+                password: 'password1',
+                role: 'user',
+                createdAt: new Date().toISOString(),
+                avatar: '👤'
+            },
+            {
+                id: 'user_005',
+                name: 'Karim Sefrioui',
+                email: 'Karim@mail.ma',
+                password: 'KarimKarim',
+                role: 'user',
+                createdAt: new Date().toISOString(),
+                avatar: '👤'
             }
         ];
         

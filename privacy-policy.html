@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Politique de Confidentialité - Billetterie Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .privacy-section {
+            min-height: calc(100vh - 200px);
+            background: var(--dark-bg);
+            padding: 80px 32px 40px;
+        }
+
+        .privacy-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .privacy-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .privacy-header h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .privacy-header p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .privacy-content {
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+
+        .privacy-section-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            color: var(--accent-primary);
+        }
+
+        .privacy-section-content {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .privacy-section-content p {
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+
+        .privacy-section-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .privacy-section-content li {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .privacy-section {
+                padding: 60px 20px 40px;
+            }
+
+            .privacy-header h1 {
+                font-size: 28px;
+            }
+
+            .privacy-section-title {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <div class="navbar-content">
+            <!-- NAVBAR LEFT: LOGO ONLY -->
+            <div class="navbar-left">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <div class="logo-container">
+                        <img src="src/image/logo.jpg" alt="Logo" class="logo">
+                        <span class="brand-name">Billetterie.com</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- NAVBAR CENTER: ALL LINKS -->
+            <nav class="navbar-center">
+                <a href="index.html" class="nav-item">Accueil</a>
+                <a href="my-tickets.html" class="nav-item">Mes Billets</a>
+                <a href="contact.html" class="nav-item">Contact</a>
+            </nav>
+
+            <!-- NAVBAR RIGHT -->
+            <div class="navbar-right">
+                <div class="nav-auth" id="nav-auth">
+                    <!-- Will be populated by JavaScript -->
+                    <a href="auth.html" class="login-btn">
+                        <i class="fas fa-sign-in-alt"></i> Se Connecter
+                    </a>
+                </div>
+
+                <button class="mobile-menu" id="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav" id="mobile-nav">
+        <a href="index.html" class="mobile-nav-item">Accueil</a>
+        <a href="my-tickets.html" class="mobile-nav-item">Mes Billets</a>
+        <a href="contact.html" class="mobile-nav-item">Contact</a>
+        <div class="mobile-nav-divider"></div>
+        <div id="mobile-nav-auth" style="padding: 12px 16px;">
+            <!-- Will be populated by JavaScript -->
+        </div>
+    </nav>
+
+    <!-- PRIVACY SECTION -->
+    <section class="privacy-section">
+        <div class="privacy-container">
+            <div class="privacy-header">
+                <h1>Politique de Confidentialité</h1>
+                <p>Dernière mise à jour: May 2026</p>
+            </div>
+
+            <div class="privacy-content">
+                <div class="privacy-section-title">1. Introduction</div>
+                <div class="privacy-section-content">
+                    <p>Billetterie.com ("nous", "notre" ou "nos") exploite le site Billetterie. Cette page vous informe de nos politiques concernant la collecte, l'utilisation et la divulgation de données personnelles lorsque vous utilisez notre service et des choix que vous avez associés à ces données.</p>
+                </div>
+
+                <div class="privacy-section-title">2. Collecte de Données</div>
+                <div class="privacy-section-content">
+                    <p>Nous collectons plusieurs types de données différentes à des fins différentes afin de vous fournir un meilleur service :</p>
+                    <ul>
+                        <li><strong>Données d'identification :</strong> Nom, adresse e-mail, numéro de téléphone</li>
+                        <li><strong>Données de paiement :</strong> Informations relatives aux transactions (montants, dates)</li>
+                        <li><strong>Données de navigation :</strong> Adresse IP, type de navigateur, pages visitées</li>
+                        <li><strong>Données de préférence :</strong> Événements d'intérêt, catégories de billets</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-section-title">3. Utilisation des Données</div>
+                <div class="privacy-section-content">
+                    <p>Billetterie.com utilise les données collectées à diverses fins :</p>
+                    <ul>
+                        <li>Fournir et maintenir nos services</li>
+                        <li>Notifier les changements apportés à notre service</li>
+                        <li>Permettre la participation à des fonctionnalités interactives de notre service</li>
+                        <li>Fournir un support client</li>
+                        <li>Recueillir des analyses ou des informations précieuses</li>
+                        <li>Surveiller l'utilisation de notre service</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-section-title">4. Sécurité des Données</div>
+                <div class="privacy-section-content">
+                    <p>La sécurité de vos données est importante pour nous mais rappelez-vous qu'aucune méthode de transmission sur Internet n'est 100% sécurisée. Bien que nous nous efforçons d'utiliser des moyens commercialement acceptables pour protéger vos données personnelles, nous ne pouvons pas garantir sa sécurité absolue.</p>
+                </div>
+
+                <div class="privacy-section-title">5. Droit à la Vie Privée</div>
+                <div class="privacy-section-content">
+                    <p>Vous avez le droit d'accéder, de corriger ou de supprimer vos données personnelles à tout moment. Vous pouvez également retirer votre consentement à la collecte et à l'utilisation de vos données en nous contactant.</p>
+                </div>
+
+                <div class="privacy-section-title">6. Partage de Données</div>
+                <div class="privacy-section-content">
+                    <p>Nous ne vendrons, n'échangerons ni ne louerons vos données personnelles à des tiers. Nous pouvons partager vos informations avec :</p>
+                    <ul>
+                        <li>Nos prestataires de services qui nous assistent dans l'exploitation de notre site</li>
+                        <li>Les forces de l'ordre si légalement requis</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-section-title">7. Cookies</div>
+                <div class="privacy-section-content">
+                    <p>Notre site utilise des "cookies" pour améliorer l'expérience utilisateur. Vous avez la possibilité de définir votre navigateur pour refuser les cookies. Cependant, certaines parties du site peuvent ne pas fonctionner correctement si vous désactivez les cookies.</p>
+                </div>
+
+                <div class="privacy-section-title">8. Modifications de cette Politique</div>
+                <div class="privacy-section-content">
+                    <p>Nous pouvons mettre à jour notre politique de confidentialité de temps en temps. Nous vous avisé par la publication de la nouvelle politique de confidentialité sur cette page et en mettant à jour la date "Dernière mise à jour".</p>
+                </div>
+
+                <div class="privacy-section-title">9. Contact</div>
+                <div class="privacy-section-content">
+                    <p>Si vous avez des questions concernant cette politique de confidentialité, veuillez nous contacter à :</p>
+                    <ul>
+                        <li>Email: <strong>contact@billetterie.com</strong></li>
+                        <li>Téléphone: <strong>+212 5XX-XX-XX-XX</strong></li>
+                        <li>Adresse: <strong>Maroc</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Billetterie. Événements Premium au Maroc.</p>
+            <div class="footer-credits">
+                <a href="terms-conditions.html" style="color: var(--accent-primary); text-decoration: none; margin: 0 12px;">Conditions d'Utilisation</a>
+                |
+                <a href="contact.html" style="color: var(--accent-primary); text-decoration: none; margin: 0 12px;">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+    <script>
+        // Setup navigation auth and hamburger menu for this page
+        document.addEventListener('DOMContentLoaded', () => {
+            setupNavAuth();
+            setupHamburgerMenu();
+        });
+    </script>
+</body>
+</html>

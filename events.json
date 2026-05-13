@@ -47,11 +47,11 @@
     "prix_max": 1000,
     "lieu_precis": "Stade Moulay Abdallah",
     "description": "Assistez au match de gala annuel mettant en scène les légendes du football marocain et international! Une occasion rare de voir jouer ensemble les plus grands joueurs des années passées. Ce spectacle d'exception promet des dribbles élégants, des tirs précis et une ambiance électrisante dans les tribunes. Les recettes de cet événement caritatif seront reversées à des associations locales. Un moment à ne pas manquer pour tous les amateurs de football!",
-    "capacite": 6500,
+    "capacite": 68700,
     "organisateur": "Fédération Royale Marocaine de Football",
     "contact": "+212 5 37 55 66 77",
-    "parking": "Oui - 300 places disponibles",
-    "regles": "Accès 17h00 - Enfants gratuit en-dessous de 5 ans"
+    "parking": "Oui - 30000 places disponibles",
+    "regles": "Accès 14h00 - Enfants gratuit en-dessous de 5 ans"
   },
   {
     "id_evenement": 4,

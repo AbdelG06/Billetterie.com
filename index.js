@@ -457,8 +457,35 @@ function setupNavAuth() {
     // Check if user is logged in
     const session = JSON.parse(sessionStorage.getItem('billetterie_session') || 'null');
     
+    // Update navbar links based on user role
+    const navMyTickets = document.getElementById('nav-my-tickets');
+    const navDashboard = document.getElementById('nav-dashboard');
+    const navContact = document.getElementById('nav-contact');
+    const mobileNavMyTickets = document.getElementById('mobile-nav-my-tickets');
+    const mobileDashboard = document.getElementById('mobile-nav-dashboard');
+    const mobileNavContact = document.getElementById('mobile-nav-contact');
+    
     if (session && session.userId) {
-        // User is logged in - show profile
+        // User is logged in
+        if (session.role === 'creator') {
+            // Creator: show only Accueil and Tableau de Bord
+            if (navMyTickets) navMyTickets.style.display = 'none';
+            if (navContact) navContact.style.display = 'none';
+            if (navDashboard) navDashboard.style.display = 'block';
+            if (mobileNavMyTickets) mobileNavMyTickets.style.display = 'none';
+            if (mobileNavContact) mobileNavContact.style.display = 'none';
+            if (mobileDashboard) mobileDashboard.style.display = 'block';
+        } else {
+            // Regular user: show Accueil, Mes Billets, Contact
+            if (navMyTickets) navMyTickets.style.display = 'block';
+            if (navContact) navContact.style.display = 'block';
+            if (navDashboard) navDashboard.style.display = 'none';
+            if (mobileNavMyTickets) mobileNavMyTickets.style.display = 'block';
+            if (mobileNavContact) mobileNavContact.style.display = 'block';
+            if (mobileDashboard) mobileDashboard.style.display = 'none';
+        }
+        
+        // Show user profile
         const initials = session.name.split(' ').map(n => n[0]).join('').toUpperCase();
         const userRole = session.role.charAt(0).toUpperCase() + session.role.slice(1);
         
@@ -519,7 +546,15 @@ function setupNavAuth() {
             `;
         }
     } else {
-        // User not logged in - show login button
+        // User not logged in - show default nav links
+        if (navMyTickets) navMyTickets.style.display = 'block';
+        if (navContact) navContact.style.display = 'block';
+        if (navDashboard) navDashboard.style.display = 'none';
+        if (mobileNavMyTickets) mobileNavMyTickets.style.display = 'block';
+        if (mobileNavContact) mobileNavContact.style.display = 'block';
+        if (mobileDashboard) mobileDashboard.style.display = 'none';
+        
+        // Show login button
         if (navAuth) {
             navAuth.innerHTML = `<a href="auth.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Se Connecter</a>`;
         }
@@ -533,7 +568,7 @@ function setupNavAuth() {
 // ==================== LOGOUT FUNCTION ====================
 function logout() {
     sessionStorage.removeItem('billetterie_session');
-    window.location.href = 'auth.html';
+    window.location.href = 'index.html';
 }
 
 // ==================== HAMBURGER MENU ====================

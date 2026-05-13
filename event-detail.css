@@ -379,20 +379,33 @@
 
 .modal-close {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    background: none;
-    border: none;
-    color: var(--text-secondary);
+    top: 15px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 59, 59, 0.15);
+    border: 2px solid rgba(255, 59, 59, 0.3);
+    color: var(--accent-primary);
     cursor: pointer;
-    font-size: 24px;
-    transition: all 0.3s ease;
-    padding: 8px;
+    font-size: 28px;
+    transition: all 0.2s ease;
+    padding: 0;
+    z-index: 2001;
+    pointer-events: auto;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-close:hover {
-    color: var(--accent-primary);
+    background: rgba(255, 59, 59, 0.3);
+    border-color: var(--accent-primary);
     transform: rotate(90deg);
+}
+
+.modal-close:active {
+    transform: scale(0.95);
 }
 
 /* ==================== RESERVATION FORM ==================== */
@@ -530,6 +543,123 @@
 
 .event-action-btn.primary:hover {
     background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
+}
+
+/* ==================== PROMO CODE SECTION ==================== */
+.promo-group {
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.08), rgba(255, 59, 59, 0.08));
+    border: 1.5px solid rgba(255, 59, 59, 0.15);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.promo-group .form-label {
+    margin-bottom: 12px;
+}
+
+.promo-input-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+}
+
+.promo-input {
+    flex: 1;
+    padding: 12px 16px !important;
+    border: 1.5px solid rgba(255, 59, 59, 0.3) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.promo-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.promo-input:focus {
+    border-color: var(--accent-primary) !important;
+    background: rgba(255, 59, 59, 0.08) !important;
+    box-shadow: 0 0 20px rgba(255, 59, 59, 0.15);
+}
+
+.promo-button {
+    flex: 0 0 auto;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, rgba(255, 59, 59, 0.9), rgba(255, 107, 107, 0.9));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(255, 59, 59, 0.3);
+}
+
+.promo-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 59, 59, 0.4);
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+}
+
+.promo-button:active {
+    transform: translateY(0);
+}
+
+.promo-message {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.promo-success {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.15), rgba(76, 175, 80, 0.1));
+    border: 1px solid rgba(76, 175, 80, 0.4);
+    border-radius: 8px;
+    color: #4caf50;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.promo-success i {
+    font-size: 16px;
+}
+
+.promo-error {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, rgba(244, 67, 54, 0.15), rgba(244, 67, 54, 0.1));
+    border: 1px solid rgba(244, 67, 54, 0.4);
+    border-radius: 8px;
+    color: #f44336;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.promo-error i {
+    font-size: 16px;
 }
 
 /* ==================== PRICE SUMMARY ==================== */

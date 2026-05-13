@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord Créateur - Billetterie Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="creator-dashboard.css">
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <div class="navbar-content">
+            <div class="navbar-left">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <div class="logo-container">
+                        <img src="src/image/logo.jpg" alt="Logo" class="logo">
+                        <span class="brand-name">Billetterie.com</span>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="navbar-center">
+                <a href="index.html" class="nav-item">Accueil</a>
+                <a href="creator-dashboard.html" class="nav-item active">Tableau de Bord</a>
+            </nav>
+
+            <div class="navbar-right">
+                <div class="nav-auth" id="nav-auth">
+                    <a href="auth.html" class="login-btn">
+                        <i class="fas fa-sign-in-alt"></i> Se Connecter
+                    </a>
+                </div>
+                <button class="mobile-menu" id="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav" id="mobile-nav">
+        <a href="index.html" class="mobile-nav-item">Accueil</a>
+        <a href="creator-dashboard.html" class="mobile-nav-item active">Tableau de Bord</a>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <section class="dashboard-section">
+        <div class="dashboard-container">
+            <!-- SIDEBAR -->
+            <aside class="dashboard-sidebar">
+                <div class="sidebar-menu">
+                    <a href="#" class="sidebar-item active" onclick="switchTab('create')">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Créer un Événement</span>
+                    </a>
+                    <a href="#" class="sidebar-item" onclick="switchTab('events')">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Mes Événements</span>
+                    </a>
+                    <a href="#" class="sidebar-item" onclick="switchTab('stats')">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Statistiques</span>
+                    </a>
+                </div>
+            </aside>
+
+            <!-- CONTENT AREA -->
+            <main class="dashboard-content">
+                <!-- CREATE EVENT TAB -->
+                <div class="tab-content active" id="tab-create">
+                    <div class="content-header">
+                        <h1><i class="fas fa-plus-circle"></i> Créer un Nouvel Événement</h1>
+                        <p>Remplissez le formulaire ci-dessous pour créer et publier votre événement</p>
+                    </div>
+
+                    <form id="event-form" onsubmit="submitEvent(event)">
+                        <div class="form-grid-2">
+                            <!-- AFFICHE / IMAGE -->
+                            <div class="form-section full-width">
+                                <div class="form-section-title">
+                                    <i class="fas fa-image"></i> Affiche de l'Événement
+                                </div>
+                                <div class="image-upload-area" id="image-upload-area">
+                                    <input type="file" id="event-image" name="event_image" accept="image/*" onchange="previewImage(event)" style="display: none;">
+                                    <div class="upload-placeholder">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <p>Cliquez pour uploader ou glissez votre image</p>
+                                        <span>PNG, JPG, WebP - Max 5MB</span>
+                                    </div>
+                                    <img id="image-preview" src="" alt="Preview" style="display: none; max-width: 100%; border-radius: 8px;">
+                                </div>
+                            </div>
+
+                            <!-- INFORMATIONS DE BASE -->
+                            <div class="form-section">
+                                <div class="form-section-title">
+                                    <i class="fas fa-info-circle"></i> Informations Générales
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Titre de l'Événement *</label>
+                                    <input type="text" class="form-input" id="event_title" name="event_title" placeholder="Ex: Concert Gims 2026" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Catégorie *</label>
+                                    <select class="form-input" id="event_category" name="event_category" required>
+                                        <option value="">-- Sélectionnez une catégorie --</option>
+                                        <option value="Musique">🎵 Musique</option>
+                                        <option value="Comédie">😂 Comédie</option>
+                                        <option value="Sport">⚽ Sport</option>
+                                        <option value="Festival">🎪 Festival</option>
+                                        <option value="Cinéma">🎬 Cinéma</option>
+                                        <option value="Théâtre">🎭 Théâtre</option>
+                                        <option value="Conférence">🎤 Conférence</option>
+                                        <option value="Formation">📚 Formation</option>
+                                        <option value="Exposition">🖼️ Exposition</option>
+                                        <option value="Autre">📌 Autre</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Organisateur *</label>
+                                    <input type="text" class="form-input" id="event_organizer" name="event_organizer" placeholder="Nom de votre organisation" required>
+                                </div>
+                            </div>
+
+                            <!-- DATE ET HORAIRE -->
+                            <div class="form-section">
+                                <div class="form-section-title">
+                                    <i class="fas fa-calendar"></i> Date et Horaire
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Date de l'Événement *</label>
+                                    <input type="date" class="form-input" id="event_date" name="event_date" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Heure de Début *</label>
+                                    <input type="time" class="form-input" id="event_time" name="event_time" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Capacité (nombre de places) *</label>
+                                    <input type="number" class="form-input" id="event_capacity" name="event_capacity" min="1" placeholder="Ex: 1000" required>
+                                </div>
+                            </div>
+
+                            <!-- LOCALISATION -->
+                            <div class="form-section">
+                                <div class="form-section-title">
+                                    <i class="fas fa-map-marker-alt"></i> Localisation
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Ville *</label>
+                                    <select class="form-input" id="event_city" name="event_city" required>
+                                        <option value="">-- Sélectionnez une ville --</option>
+                                        <option value="Casablanca">Casablanca</option>
+                                        <option value="Rabat">Rabat</option>
+                                        <option value="Fes">Fes</option>
+                                        <option value="Marrakech">Marrakech</option>
+                                        <option value="Tangier">Tangier</option>
+                                        <option value="Agadir">Agadir</option>
+                                        <option value="Essaouira">Essaouira</option>
+                                        <option value="Meknes">Meknes</option>
+                                        <option value="Oujda">Oujda</option>
+                                        <option value="Azemmour">Azemmour</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Lieu Précis *</label>
+                                    <input type="text" class="form-input" id="event_location" name="event_location" placeholder="Ex: Grand Stade Casablanca" required>
+                                </div>
+                            </div>
+
+                            <!-- TARIFICATION -->
+                            <div class="form-section">
+                                <div class="form-section-title">
+                                    <i class="fas fa-money-bill"></i> Tarification
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Prix Minimum (DH) *</label>
+                                    <input type="number" class="form-input" id="event_price_min" name="event_price_min" min="0" step="50" placeholder="Ex: 100" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Prix Maximum (DH) *</label>
+                                    <input type="number" class="form-input" id="event_price_max" name="event_price_max" min="0" step="50" placeholder="Ex: 500" required>
+                                </div>
+                            </div>
+
+                            <!-- DESCRIPTION -->
+                            <div class="form-section full-width">
+                                <div class="form-section-title">
+                                    <i class="fas fa-align-left"></i> Description
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Description Détaillée *</label>
+                                    <textarea class="form-input form-textarea" id="event_description" name="event_description" placeholder="Décrivez votre événement en détail..." required></textarea>
+                                </div>
+                            </div>
+
+                            <!-- DÉTAILS PRATIQUES -->
+                            <div class="form-section">
+                                <div class="form-section-title">
+                                    <i class="fas fa-phone"></i> Contact
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Téléphone de Contact *</label>
+                                    <input type="tel" class="form-input" id="event_contact" name="event_contact" placeholder="+212 5 XX XX XX XX" required>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <div class="form-section-title">
+                                    <i class="fas fa-car"></i> Services
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Parking Disponible</label>
+                                    <select class="form-input" id="event_parking" name="event_parking">
+                                        <option value="Non">Non</option>
+                                        <option value="Oui - 100 places">Oui - 100 places</option>
+                                        <option value="Oui - 300 places">Oui - 300 places</option>
+                                        <option value="Oui - 500 places">Oui - 500 places</option>
+                                        <option value="Oui - Plus de 500 places">Oui - Plus de 500 places</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- RÈGLES -->
+                            <div class="form-section full-width">
+                                <div class="form-section-title">
+                                    <i class="fas fa-list-check"></i> Règles d'Accès
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Règles d'Accès et Restrictions</label>
+                                    <textarea class="form-input form-textarea" id="event_rules" name="event_rules" placeholder="Ex: Accès à partir de 18 ans, Accès 19h00 - Début 20h00..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn-cancel" onclick="resetForm()">
+                                <i class="fas fa-times"></i> Annuler
+                            </button>
+                            <button type="submit" class="btn-submit">
+                                <i class="fas fa-check"></i> Publier l'Événement
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- EVENTS LIST TAB -->
+                <div class="tab-content" id="tab-events">
+                    <div class="content-header">
+                        <h1><i class="fas fa-calendar-alt"></i> Mes Événements</h1>
+                        <p>Gérez tous vos événements créés</p>
+                    </div>
+
+                    <div id="events-list-container">
+                        <!-- Events will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- STATS TAB -->
+                <div class="tab-content" id="tab-stats">
+                    <div class="content-header">
+                        <h1><i class="fas fa-chart-bar"></i> Statistiques</h1>
+                        <p>Vue d'ensemble de vos événements</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="stat-total-events">0</div>
+                                <div class="stat-label">Événements Créés</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-ticket-alt"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="stat-total-tickets">0</div>
+                                <div class="stat-label">Billets Vendus</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-money-bill"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="stat-revenue">0 DH</div>
+                                <div class="stat-label">Revenu Total</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="stat-successful-events">0</div>
+                                <div class="stat-label">Événements Réussis</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Billetterie. Événements Premium au Maroc.</p>
+            <div class="footer-credits">
+                <a href="terms-conditions.html" style="color: var(--accent-primary); text-decoration: none; margin: 0 12px;">Conditions d'Utilisation</a>
+                |
+                <a href="contact.html" style="color: var(--accent-primary); text-decoration: none; margin: 0 12px;">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+    <script src="creator-dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            setupNavAuth();
+            setupHamburgerMenu();
+            loadCreatorEvents();
+            updateStats();
+        });
+    </script>
+</body>
+</html>

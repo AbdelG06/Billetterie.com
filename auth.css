@@ -143,6 +143,42 @@ body {
     background: rgba(255, 59, 59, 0.02);
 }
 
+/* ==================== PASSWORD INPUT WRAPPER ==================== */
+.password-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-wrapper input {
+    width: 100%;
+    padding-right: 44px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.password-toggle:hover {
+    color: var(--accent-primary);
+    transform: scale(1.1);
+}
+
+.password-toggle:active {
+    transform: scale(0.95);
+}
+
 /* ==================== BUTTONS ==================== */
 .auth-button {
     width: 100%;

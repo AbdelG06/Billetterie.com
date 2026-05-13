@@ -180,24 +180,30 @@ function openReservationForm(eventId, eventTitle) {
     const modal = document.getElementById('reservation-modal');
     const reservationBody = document.getElementById('reservation-body');
 
-    // Get ticket types for this event
-    const response = fetch('events.json')
-        .then(res => res.json())
-        .then(events => {
-            const event = events.find(e => e.id_evenement == eventId);
-            const ticketTypes = generateTicketTypes(event.prix_min, event.prix_max);
-            
-            let ticketOptionsHTML = ticketTypes.map((ticket, idx) => `
-                <label class="ticket-option-radio">
-                    <input type="radio" name="ticket_type" value="${ticket.id}" data-price="${ticket.price}" ${idx === 0 ? 'checked' : ''} onchange="updateTotalPrice()">
-                    <div class="ticket-option-details">
-                        <span class="ticket-option-name">${ticket.name}</span>
-                        <span class="ticket-option-price">${ticket.price}DH</span>
-                    </div>
-                </label>
-            `).join('');
+    // First try to find the event in localStorage (creator events)
+    let allEvents = [];
+    try {
+        allEvents = JSON.parse(localStorage.getItem('events')) || [];
+    } catch (e) {}
+    
+    // Check local storage first
+    let event = allEvents.find(e => e.id_evenement == eventId || e.id == eventId);
+    
+    const renderModal = (eventData) => {
+        window.currentEvent = eventData; // Store globally for proceedToPayment
+        const ticketTypes = generateTicketTypes(eventData.prix_min, eventData.prix_max);
+        
+        let ticketOptionsHTML = ticketTypes.map((ticket, idx) => `
+            <label class="ticket-option-radio">
+                <input type="radio" name="ticket_type" value="${ticket.id}" data-price="${ticket.price}" ${idx === 0 ? 'checked' : ''} onchange="updateTotalPrice()">
+                <div class="ticket-option-details">
+                    <span class="ticket-option-name">${ticket.name}</span>
+                    <span class="ticket-option-price">${ticket.price}DH</span>
+                </div>
+            </label>
+        `).join('');
 
-            reservationBody.innerHTML = `
+        reservationBody.innerHTML = `
                 <div class="reservation-form">
                     <h3 class="form-title">
                         <i class="fas fa-calendar-check"></i> Réserver - ${eventTitle}
@@ -219,15 +225,16 @@ function openReservationForm(eventId, eventTitle) {
                         </div>
 
                         <!-- Promo Code -->
-                        <div class="form-group">
-                            <label class="form-label">Code Promo (optionnel)</label>
-                            <div style="display: flex; gap: 8px;">
-                                <input type="text" class="form-input" name="promo_code" id="promo_code" placeholder="Ex: bill25" style="flex: 1;">
-                                <button type="button" class="form-button" onclick="applyPromoCode()" style="flex: 0 0 auto; padding: 12px 20px;">
-                                    <i class="fas fa-check"></i>
+                        <div class="form-group promo-group">
+                            <label class="form-label"><i class="fas fa-tag"></i> Code Promo <span style="color: var(--text-secondary); font-size: 12px; font-weight: 400;">(optionnel)</span></label>
+                            <div class="promo-input-wrapper">
+                                <input type="text" class="form-input promo-input" name="promo_code" id="promo_code" placeholder="Entrez un code...">
+                                <button type="button" class="promo-button" onclick="applyPromoCode()">
+                                    <i class="fas fa-gift"></i>
+                                    <span>Appliquer</span>
                                 </button>
                             </div>
-                            <small id="promo-message" style="margin-top: 8px; display: none;"></small>
+                            <div id="promo-message" class="promo-message" style="margin-top: 10px; display: none;"></div>
                         </div>
 
                         <!-- Price Summary -->
@@ -268,10 +275,10 @@ function openReservationForm(eventId, eventTitle) {
                         </div>
 
                         <!-- Terms -->
-                        <div class="form-group" style="margin-top: 24px; margin-bottom: 24px;">
-                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; font-weight: 500;">
-                                <input type="checkbox" required style="width: 18px; height: 18px; cursor: pointer;">
-                                <span>J'accepte les conditions d'utilisation et la politique de confidentialité</span>
+                        <div class="form-group" style="display: flex; align-items: center; gap: 12px; background: rgba(255, 59, 59, 0.05); padding: 16px; border-radius: 8px; border: 1px solid rgba(255, 59, 59, 0.1); margin-top: 24px; margin-bottom: 24px;">
+                            <input type="checkbox" required style="width: 18px; height: 18px; cursor: pointer; min-width: 20px;">
+                            <label style="display: flex; align-items: center; gap: 4px; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--text-secondary); margin: 0; flex: 1;">
+                                J'accepte les <a href="terms-conditions.html" target="_blank" onclick="event.stopPropagation();" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600; cursor: pointer; pointer-events: auto; transition: opacity 0.2s ease;" onmouseover="this.style.opacity='0.8';" onmouseout="this.style.opacity='1';">conditions d'utilisation</a> et la <a href="privacy-policy.html" target="_blank" onclick="event.stopPropagation();" style="color: var(--accent-primary); text-decoration: underline; font-weight: 600; cursor: pointer; pointer-events: auto; transition: opacity 0.2s ease;" onmouseover="this.style.opacity='0.8';" onmouseout="this.style.opacity='1';">politique de confidentialité</a>
                             </label>
                         </div>
 
@@ -282,10 +289,25 @@ function openReservationForm(eventId, eventTitle) {
                 </div>
             `;
 
-            modal.classList.add('active');
-            updateTotalPrice();
-        })
-        .catch(err => console.error('Erreur:', err));
+        modal.classList.add('active');
+        updateTotalPrice();
+    };
+
+    if (event) {
+        renderModal(event);
+    } else {
+        fetch('events.json')
+            .then(res => res.json())
+            .then(events => {
+                event = events.find(e => e.id_evenement == eventId);
+                if (event) {
+                    renderModal(event);
+                } else {
+                    console.error('Événement non trouvé');
+                }
+            })
+            .catch(err => console.error('Erreur:', err));
+    }
 }
 
 // ==================== UPDATE TOTAL PRICE ====================
@@ -339,30 +361,44 @@ function applyPromoCode() {
     const promoMessage = document.getElementById('promo-message');
     
     if (!promoCode) {
-        promoMessage.textContent = '';
+        promoMessage.innerHTML = '';
         promoMessage.style.display = 'none';
         promoMessage.dataset.discount = 0;
         updateTotalPrice();
         return;
     }
     
-    // Define valid promo codes with discounts
+    // Define valid promo codes with multipliers (same as payment.js)
     const promoCodes = {
-        'BILL25': 25,  // 25% discount
-        'BILL15': 15,  // 15% discount
-        'BILL10': 10,  // 10% discount
-        'WELCOME20': 20, // 20% discount
-        'SUMMER30': 30   // 30% discount
+        'FREE2024': 0,        // 100% discount (FREE)
+        'INVITE50': 0.5,      // 50% discount
+        'SAVE25': 0.75,       // 25% discount
+        'PROMO30': 0.7,       // 30% discount
+        // Legacy codes kept for backward compatibility
+        'BILL25': 0.75,       // 25% discount
+        'BILL15': 0.85,       // 15% discount
+        'BILL10': 0.90,       // 10% discount
+        'WELCOME20': 0.80,    // 20% discount
+        'SUMMER30': 0.70      // 30% discount
     };
     
-    if (promoCodes[promoCode]) {
-        const discount = promoCodes[promoCode];
-        promoMessage.innerHTML = `<span style="color: var(--accent-primary);"><i class="fas fa-check-circle"></i> Code accepté! Réduction: ${discount}%</span>`;
+    if (promoCodes.hasOwnProperty(promoCode)) {
+        const multiplier = promoCodes[promoCode];
+        const discountPercent = Math.round((1 - multiplier) * 100);
+        
+        let message = '';
+        if (multiplier === 0) {
+            message = `<div class="promo-success"><i class="fas fa-gift"></i> <strong>🎁 GRATUIT!</strong> Code: ${promoCode}</div>`;
+        } else {
+            message = `<div class="promo-success"><i class="fas fa-check-circle"></i> <strong>${discountPercent}% de réduction!</strong> Code: ${promoCode}</div>`;
+        }
+        
+        promoMessage.innerHTML = message;
         promoMessage.style.display = 'block';
-        promoMessage.dataset.discount = discount;
+        promoMessage.dataset.discount = discountPercent;
         updateTotalPrice();
     } else {
-        promoMessage.innerHTML = `<span style="color: #f44336;"><i class="fas fa-times-circle"></i> Code invalide</span>`;
+        promoMessage.innerHTML = `<div class="promo-error"><i class="fas fa-times-circle"></i> Code invalide. Réessayez!</div>`;
         promoMessage.style.display = 'block';
         promoMessage.dataset.discount = 0;
         updateTotalPrice();
@@ -376,6 +412,9 @@ function proceedToPayment(e, eventId, eventTitle) {
     const form = document.getElementById('reservation-form-element');
     const formData = new FormData(form);
     
+    // Check if we have currentEvent stored from openReservationModal
+    const currentEvent = window.currentEvent || {};
+    
     const reservationData = {
         event_id: eventId,
         event_title: eventTitle,
@@ -385,6 +424,13 @@ function proceedToPayment(e, eventId, eventTitle) {
         email: formData.get('email'),
         phone: formData.get('phone'),
         promo_code: formData.get('promo_code'),
+        date_evenement: currentEvent.date || currentEvent.date_evenement || '',
+        heure: currentEvent.heure || currentEvent.time || '20:00',
+        lieu_precis: currentEvent.location || currentEvent.lieu_precis || '',
+        nom_ville: currentEvent.city || currentEvent.nom_ville || '',
+        categorie: currentEvent.category || currentEvent.categorie || '',
+        image_url: currentEvent.image_url || currentEvent.image || '',
+        image_data: currentEvent.image_data || '',
         ...window.reservationData
     };
     
@@ -398,7 +444,15 @@ function proceedToPayment(e, eventId, eventTitle) {
 // ==================== CLOSE RESERVATION MODAL ====================
 function closeReservationModal() {
     const modal = document.getElementById('reservation-modal');
-    modal.classList.remove('active');
+    if (modal) {
+        modal.classList.remove('active');
+        // Reset form
+        const form = document.getElementById('reservation-form-element');
+        if (form) form.reset();
+        // Clear promo message
+        const promoMsg = document.getElementById('promo-message');
+        if (promoMsg) promoMsg.innerHTML = '';
+    }
 }
 
 // ==================== SHOW ERROR ====================

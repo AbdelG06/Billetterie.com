@@ -1,14 +1,48 @@
 // ==================== LOAD RESERVATIONS ====================
 function loadReservations() {
     const ticketsContent = document.getElementById('tickets-content');
-    const reservations = JSON.parse(localStorage.getItem('reservations')) || [];
-
+    
+    // Check if user is logged in
+    const session = JSON.parse(sessionStorage.getItem('billetterie_session') || 'null');
+    const isLoggedIn = session && session.userId;
+    
+    // Load registered user reservations from localStorage
+    let reservations = JSON.parse(localStorage.getItem('reservations')) || [];
+    
+    // Load guest reservations from sessionStorage (if any)
+    let guestReservations = JSON.parse(sessionStorage.getItem('guest_reservations') || '[]');
+    
+    // If user is logged in: only show their registered reservations
+    if (isLoggedIn) {
+        reservations = reservations.filter(r => r.user_id === session.userId);
+    } else {
+        // If not logged in: only show guest reservations
+        reservations = guestReservations;
+    }
+    
     if (reservations.length === 0) {
         showEmptyState();
         return;
     }
-
-    let ticketsHTML = '<div class="tickets-grid">';
+    
+    // Show warning message for guest reservations
+    let ticketsHTML = '';
+    if (!isLoggedIn && guestReservations.length > 0) {
+        ticketsHTML += `
+            <div class="guest-warning-banner">
+                <div class="warning-content">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <strong>⏰ Attention - Mode Invité</strong>
+                        <p>Vos billets seront supprimés à la fin de votre session. Pour garder vos billets de façon permanente, connectez-vous à votre compte!</p>
+                    </div>
+                    <a href="auth.html" class="warning-link">Se connecter</a>
+                </div>
+            </div>
+        `;
+    }
+    
+    ticketsHTML += '<div class="tickets-grid">';
     
     reservations.forEach((reservation, idx) => {
         const reservationDate = new Date(reservation.date_reservation);
@@ -23,14 +57,47 @@ function loadReservations() {
             minute: '2-digit'
         });
 
+        const ticketId = `TKT-${1000 + idx}`;
+        const isInvitation = reservation.is_invitation || reservation.total === 0;
+        
+        // Handle pending status
+        const isPending = reservation.status === 'pending';
+        let statusBadge = '';
+        if (isPending) {
+            statusBadge = '<span class="ticket-status-badge pending" style="background: rgba(255,165,0,0.1); color: #ffa500; border: 1px solid rgba(255,165,0,0.2);">En attente</span>';
+        } else {
+            statusBadge = `<span class="ticket-status-badge ${isInvitation ? 'invitation' : 'confirmed'}">${isInvitation ? 'Invitation' : 'Confirmé'}</span>`;
+        }
+
+        const guestBadge = reservation.is_guest ? '<span class="guest-badge" style="font-size: 11px; margin-left: 8px;"><i class="fas fa-user-shield"></i> Invité</span>' : '';
+
+        // Handle buttons based on status
+        let actionButtons = '';
+        if (isPending) {
+            actionButtons = `
+                <div style="color: #ffa500; font-size: 13px; text-align: center; padding: 10px 0; width: 100%;">
+                    <i class="fas fa-clock"></i> Paiement en attente de vérification (${reservation.paymentMethod})
+                </div>
+            `;
+        } else {
+            actionButtons = `
+                <button class="ticket-action-btn" onclick="showQRCode('${ticketId}', '${reservation.email}')">
+                    <i class="fas fa-qrcode"></i> Voir QR Code
+                </button>
+                <button class="ticket-action-btn primary" onclick="downloadTicket('${ticketId}', '${reservation.event_title}')">
+                    <i class="fas fa-download"></i> Télécharger
+                </button>
+            `;
+        }
+
         ticketsHTML += `
-            <div class="ticket-card">
+            <div class="ticket-card" ${isPending ? 'style="opacity: 0.8; border-color: rgba(255,165,0,0.3);"' : ''}>
                 <div class="ticket-card-header">
                     <div>
                         <div class="ticket-card-title">${reservation.event_title}</div>
-                        <div class="ticket-card-subtitle">Réservation #${1000 + idx}</div>
+                        <div class="ticket-card-subtitle">Réservation #${1000 + idx}${guestBadge}</div>
                     </div>
-                    <span class="ticket-status-badge">Confirmé</span>
+                    ${statusBadge}
                 </div>
 
                 <div class="ticket-card-body">
@@ -58,15 +125,22 @@ function loadReservations() {
                         <span class="ticket-info-label"><i class="fas fa-calendar"></i> Date Réservation</span>
                         <span class="ticket-info-value">${formattedDate} à ${formattedTime}</span>
                     </div>
+
+                    <div class="ticket-info-row">
+                        <span class="ticket-info-label"><i class="fas fa-money-bill-wave"></i> Montant</span>
+                        <span class="ticket-info-value" style="color: ${isInvitation ? '#4CAF50' : 'var(--accent-primary)'}">${isInvitation ? 'GRATUIT' : reservation.total + 'DH'}</span>
+                    </div>
+                    
+                    ${isPending && reservation.paymentCode ? `
+                    <div class="ticket-info-row" style="background: rgba(255,165,0,0.05); padding: 5px; border-radius: 4px; margin-top: 5px;">
+                        <span class="ticket-info-label" style="color: #ffa500;"><i class="fas fa-hashtag"></i> Code de paiement</span>
+                        <span class="ticket-info-value highlight" style="color: #ffa500; font-size: 16px; font-weight: 900;">${reservation.paymentCode}</span>
+                    </div>
+                    ` : ''}
                 </div>
 
                 <div class="ticket-card-footer">
-                    <button class="ticket-action-btn" onclick="showQRCode('Billet #${1000 + idx}')">
-                        <i class="fas fa-qrcode"></i> Voir QR Code
-                    </button>
-                    <button class="ticket-action-btn primary" onclick="downloadTicket('${1000 + idx}', '${reservation.event_title}')">
-                        <i class="fas fa-download"></i> Télécharger
-                    </button>
+                    ${actionButtons}
                 </div>
             </div>
         `;
@@ -94,7 +168,7 @@ function showEmptyState() {
 }
 
 // ==================== SHOW QR CODE ====================
-function showQRCode(ticketId) {
+function showQRCode(ticketId, email) {
     const qrModal = document.getElementById('qr-modal') || createQRModal();
     
     // Update modal content
@@ -105,17 +179,34 @@ function showQRCode(ticketId) {
         modalTitle.textContent = `Code QR - ${ticketId}`;
     }
     
-    // Generate a simple QR code visual (in production, use a library like QRCode.js)
-    qrCodeContent.innerHTML = `
-        <div style="text-align: center;">
-            <div style="font-size: 120px; color: var(--accent-primary); margin-bottom: 16px;">
-                <i class="fas fa-qrcode"></i>
+    // Clear previous QR code
+    qrCodeContent.innerHTML = '';
+    
+    // Generate QR code with ticket verification link
+    const qrData = `${window.location.origin}/verify-ticket.html?ticket=${ticketId}&email=${encodeURIComponent(email || 'user@example.com')}`;
+    
+    try {
+        var qrcode = new QRCode(qrCodeContent, {
+            text: qrData,
+            width: 250,
+            height: 250,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    } catch (e) {
+        // Fallback if QRCode.js fails
+        qrCodeContent.innerHTML = `
+            <div style="text-align: center;">
+                <div style="font-size: 120px; color: var(--accent-primary); margin-bottom: 16px;">
+                    <i class="fas fa-qrcode"></i>
+                </div>
+                <div style="color: var(--text-secondary); font-size: 12px; margin-top: 10px;">
+                    ${ticketId}
+                </div>
             </div>
-            <div style="color: var(--text-secondary); font-size: 12px;">
-                ${ticketId}
-            </div>
-        </div>
-    `;
+        `;
+    }
     
     qrModal.classList.add('active');
 }
@@ -165,8 +256,91 @@ function downloadQR() {
 
 // ==================== DOWNLOAD TICKET ====================
 function downloadTicket(ticketId, eventTitle) {
-    console.log(`Téléchargement du billet #${ticketId}`);
-    alert(`Téléchargement du billet pour ${eventTitle} en cours...\n(Billet PDF à générer)`);
+    try {
+        // Get session info
+        const session = JSON.parse(sessionStorage.getItem('billetterie_session') || 'null');
+        const isLoggedIn = session && session.userId;
+        
+        // Get reservations based on user type
+        let reservations = [];
+        if (isLoggedIn) {
+            reservations = JSON.parse(localStorage.getItem('reservations') || '[]');
+            reservations = reservations.filter(r => r.user_id === session.userId);
+        } else {
+            reservations = JSON.parse(sessionStorage.getItem('guest_reservations') || '[]');
+        }
+        
+        // Find the matching reservation by event title
+        const reservation = reservations.find(r => r.event_title === eventTitle);
+        
+        if (!reservation) {
+            alert('Erreur: Billet non trouvé');
+            return;
+        }
+
+        if (reservation.status === 'pending') {
+            alert('Ce billet est en attente de paiement. Vous devez d\'abord régler le montant pour obtenir votre billet.');
+            return;
+        }
+        
+        // Enrich reservation with event details if missing (for older reservations)
+        if (!reservation.date_evenement || !reservation.image_url) {
+            let allEvents = [];
+            try {
+                allEvents = JSON.parse(localStorage.getItem('events')) || [];
+            } catch(e) {}
+            
+            let eventMatch = allEvents.find(e => e.id_evenement == reservation.event_id || e.event_title === reservation.event_title || e.titre === reservation.event_title);
+            
+            if (!eventMatch) {
+                // Try fetching synchronously - since we can't easily do it in a sync flow, we'll fetch and generate
+                fetch('events.json')
+                    .then(res => res.json())
+                    .then(events => {
+                        eventMatch = events.find(e => e.id_evenement == reservation.event_id || e.titre === reservation.event_title);
+                        if (eventMatch) {
+                            reservation.date_evenement = eventMatch.date_evenement || eventMatch.date || reservation.date_evenement;
+                            reservation.heure = eventMatch.heure || eventMatch.time || reservation.heure;
+                            reservation.lieu_precis = eventMatch.lieu_precis || eventMatch.location || reservation.lieu_precis;
+                            reservation.nom_ville = eventMatch.nom_ville || eventMatch.city || reservation.nom_ville;
+                            reservation.categorie = eventMatch.categorie || eventMatch.category || reservation.categorie;
+                            reservation.image_url = eventMatch.image_url || eventMatch.image || reservation.image_url;
+                            reservation.image_data = eventMatch.image_data || reservation.image_data;
+                        }
+                        executePDFGeneration(reservation);
+                    })
+                    .catch(err => {
+                        console.error('Fetch error:', err);
+                        executePDFGeneration(reservation);
+                    });
+                return; // exit here since we are now async
+            } else {
+                reservation.date_evenement = eventMatch.date_evenement || eventMatch.date || reservation.date_evenement;
+                reservation.heure = eventMatch.heure || eventMatch.time || reservation.heure;
+                reservation.lieu_precis = eventMatch.lieu_precis || eventMatch.location || reservation.lieu_precis;
+                reservation.nom_ville = eventMatch.nom_ville || eventMatch.city || reservation.nom_ville;
+                reservation.categorie = eventMatch.categorie || eventMatch.category || reservation.categorie;
+                reservation.image_url = eventMatch.image_url || eventMatch.image || reservation.image_url;
+                reservation.image_data = eventMatch.image_data || reservation.image_data;
+            }
+        }
+        
+        // Execute normally if we didn't go async
+        executePDFGeneration(reservation);
+        
+        function executePDFGeneration(data) {
+            // Call the PDF generation function from payment.js
+            if (typeof generateAndDownloadPDF === 'function') {
+                generateAndDownloadPDF(data);
+            } else {
+                alert('Erreur: Fonction de génération PDF non disponible');
+            }
+        }
+        
+    } catch (e) {
+        console.error('Erreur téléchargement billet:', e);
+        alert('Erreur lors du téléchargement: ' + e.message);
+    }
 }
 
 // ==================== SETUP HAMBURGER MENU ====================

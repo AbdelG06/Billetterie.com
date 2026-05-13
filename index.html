@@ -19,17 +19,20 @@
         <div class="navbar-content">
             <!-- NAVBAR LEFT: LOGO ONLY -->
             <div class="navbar-left">
-                <div class="logo-container">
-                    <img src="src/image/logo.jpg" alt="Logo" class="logo">
-                    <span class="brand-name">Billetterie.com</span>
-                </div>
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <div class="logo-container">
+                        <img src="src/image/logo.jpg" alt="Logo" class="logo">
+                        <span class="brand-name">Billetterie.com</span>
+                    </div>
+                </a>
             </div>
 
             <!-- NAVBAR CENTER: ALL LINKS -->
-            <nav class="navbar-center">
+            <nav class="navbar-center" id="navbar-center-nav">
                 <a href="index.html" class="nav-item active">Accueil</a>
-                <a href="my-tickets.html" class="nav-item">Mes Billets</a>
-                <a href="contact.html" class="nav-item">Contact</a>
+                <a href="my-tickets.html" class="nav-item" id="nav-my-tickets">Mes Billets</a>
+                <a href="creator-dashboard.html" class="nav-item" id="nav-dashboard" style="display: none;">Tableau de Bord</a>
+                <a href="contact.html" class="nav-item" id="nav-contact">Contact</a>
             </nav>
 
             <!-- NAVBAR RIGHT -->
@@ -52,8 +55,9 @@
     <!-- MOBILE NAV -->
     <nav class="mobile-nav" id="mobile-nav">
         <a href="index.html" class="mobile-nav-item">Accueil</a>
-        <a href="my-tickets.html" class="mobile-nav-item">Mes Billets</a>
-        <a href="contact.html" class="mobile-nav-item">Contact</a>
+        <a href="my-tickets.html" class="mobile-nav-item" id="mobile-nav-my-tickets">Mes Billets</a>
+        <a href="creator-dashboard.html" class="mobile-nav-item" id="mobile-nav-dashboard" style="display: none;">Tableau de Bord</a>
+        <a href="contact.html" class="mobile-nav-item" id="mobile-nav-contact">Contact</a>
         <div class="mobile-nav-divider"></div>
         <div id="mobile-nav-auth" style="padding: 12px 16px;">
             <!-- Will be populated by JavaScript -->
@@ -143,6 +147,7 @@
                 <a href="terms-conditions.html" style="color: var(--accent-primary); text-decoration: none; margin: 0 12px;">Conditions d'Utilisation</a>
                 |
                 <a href="contact.html" style="color: var(--accent-primary); text-decoration: none; margin: 0 12px;">Contact</a>
+                  <p class="footer-credits">BY: <strong>Aya Idrissi El Bouzaidi</strong> & <strong>Abdelkrim Garwaoui</strong></p>
             </div>
         </div>
     </footer>

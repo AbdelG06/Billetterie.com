@@ -27,6 +27,208 @@
     animation: scaleIn 0.5s ease-out;
 }
 
+/* ==================== SUCCESS BOX ==================== */
+.success-box {
+    background: rgba(26, 26, 26, 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 60px 40px;
+    text-align: center;
+    animation: slideUp 0.5s ease-out;
+}
+
+.success-header {
+    margin-bottom: 40px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.success-header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 15px 0;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.success-header p {
+    color: var(--text-secondary);
+    font-size: 16px;
+    margin: 10px 0 0 0;
+}
+
+/* ==================== SUCCESS DETAILS ==================== */
+.success-details {
+    background: rgba(255, 59, 59, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 30px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.detail-item {
+    padding: 15px;
+    background: rgba(13, 13, 13, 0.6);
+    border-radius: 8px;
+}
+
+.detail-label {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.detail-value {
+    display: block;
+    color: var(--text-primary);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* ==================== QR SECTION ==================== */
+.qr-section {
+    background: rgba(26, 26, 26, 0.6);
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    margin: 30px 0;
+    animation: scaleIn 0.6s ease-out;
+}
+
+.qr-title {
+    color: var(--text-primary);
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.qr-description {
+    color: var(--text-secondary);
+    font-size: 12px;
+    margin: 15px 0;
+}
+
+/* ==================== SUCCESS ACTIONS ==================== */
+.success-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.success-button {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 180px;
+}
+
+.success-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px rgba(255, 59, 59, 0.3);
+}
+
+.success-button.primary {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    min-width: 200px;
+}
+
+.success-button.primary:hover {
+    box-shadow: 0 10px 40px rgba(76, 175, 80, 0.3);
+}
+
+/* ==================== SUCCESS INFO ==================== */
+.success-info {
+    background: rgba(76, 175, 80, 0.1);
+    border-left: 4px solid #4CAF50;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 30px;
+    text-align: left;
+    display: flex;
+    gap: 12px;
+}
+
+.success-info i {
+    color: #4CAF50;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.success-info p {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* ==================== LOADING STATE ==================== */
+.loading-state {
+    text-align: center;
+    padding: 40px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 59, 59, 0.2);
+    border-top-color: var(--accent-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @keyframes scaleIn {
     from {
         opacity: 0;

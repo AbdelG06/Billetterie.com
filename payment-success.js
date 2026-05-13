@@ -1,15 +1,26 @@
 // ==================== LOAD SUCCESS PAGE ====================
 function loadSuccessPage() {
     const lastReservation = JSON.parse(sessionStorage.getItem('lastReservation'));
-    const ticketInfo = JSON.parse(sessionStorage.getItem('ticketInfo'));
     
     if (!lastReservation) {
         window.location.href = 'index.html';
         return;
     }
     
-    displaySuccessPage(lastReservation, ticketInfo);
+    // We already moved the execution logically out of payment.js, 
+    // so we call displaySuccessPage directly here.
+    displaySuccessPage(lastReservation);
 }
+
+// ==================== DOCUMENT READY ====================
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if we need to redirect or show success
+    loadSuccessPage();
+    
+    // Setup navigation and menu
+    if (typeof setupNavAuth === 'function') setupNavAuth();
+    if (typeof setupHamburgerMenu === 'function') setupHamburgerMenu();
+});
 
 // ==================== DISPLAY SUCCESS PAGE ====================
 function displaySuccessPage(reservation, ticketInfo) {
